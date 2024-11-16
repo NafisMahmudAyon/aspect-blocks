@@ -1,19 +1,24 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "create-block/test",
+  "name": "wp-tailwind/test",
   "version": "0.1.0",
-  "title": "test",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
-  "example": {},
-  "supports": {
-    "html": false
+  "title": "Test",
+  "category": "common",
+  "icon": "welcome-learn-more",
+  "attributes": {
+    "skyColor": {
+      "type": "string"
+    },
+    "class": {
+      "type": "string"
+    },
+    "grassColor": {
+      "type": "string"
+    }
   },
-  "textdomain": "plug",
   "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "viewScript": "file:./view.js"
+  "render": "file:./render.php",
+  "viewScript": "file:./frontend.js"
 }

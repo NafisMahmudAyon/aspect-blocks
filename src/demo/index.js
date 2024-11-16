@@ -1,39 +1,58 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
+import "../style.css";
+
+import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import "./style.scss";
-
-/**
- * Internal dependencies
- */
-import Edit from "./edit";
-import save from "./save";
 import metadata from "./block.json";
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-registerBlockType(metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
+registerBlockType(metadata.name, { edit: EditComponent });
 
-	/**
-	 * @see ./save.js
-	 */
-	save,
-});
+function EditComponent(props) {
+	function updateSkyColor(e) {
+		props.setAttributes({ skyColor: e.target.value });
+	}
+	function updateClass(e) {
+		props.setAttributes({ class: e.target.value });
+	}
+
+	function updateGrassColor(e) {
+		props.setAttributes({ grassColor: e.target.value });
+	}
+
+	return (
+		<>
+			<InspectorControls>
+				Hello
+				<input
+					className="mr-3 p-2 rounded-lg"
+					type="text"
+					value={props.attributes.class}
+					onChange={updateClass}
+					placeholder="sky color..."
+				/>
+			</InspectorControls>
+			<div {...useBlockProps()}>
+				<div className="my-unique-plugin-wrapper-class">
+					<div
+						className={`${props.attributes.class} bg-red-200 border-2 border-blue-300 rounded-md p-5`}
+					>
+						Hello
+						<input
+							className="mr-3 p-2 rounded-lg"
+							type="text"
+							value={props.attributes.skyColor}
+							onChange={updateSkyColor}
+							placeholder="sky color..."
+						/>
+						<input
+							className="mr-3 p-2 rounded-lg"
+							type="text"
+							value={props.attributes.grassColor}
+							onChange={updateGrassColor}
+							placeholder="grass color..."
+						/>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
