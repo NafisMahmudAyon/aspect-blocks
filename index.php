@@ -1,9 +1,13 @@
 <?php
 /*
-  Plugin Name: Brad's Boilerplate Block Plugin
+  Plugin Name: WP Tailwind Blocks
   Version: 1.0
-  Author: Brad
-  Author URI: https://github.com/LearnWebCode
+  Author: NafisMahmudAyon
+  Author URI: https://nafisbd.com/
+  Description: WordPress Tailwind Blocks.
+  Plugin URI: https://github.com/NafisMahmudAyon/
+  License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly

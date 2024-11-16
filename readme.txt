@@ -1,5 +1,5 @@
 === Plug ===
-Contributors:      The WordPress Contributors
+Contributors:      Nafis Mahmud Ayon
 Tags:              block
 Tested up to:      6.6
 Stable tag:        0.1.0
