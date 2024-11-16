@@ -1,3 +1,2 @@
-import "./blocks/text";
-
-//dfsdfsdfs fghfg hfg
+import "./demo/index.js";
+import "./test/index.js";
