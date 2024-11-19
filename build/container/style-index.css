@@ -1,7 +1,6 @@
 /*!*******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/style.css ***!
   \*******************************************************************************************************************************************************************/
-/* .my-unique-plugin-wrapper-class { */
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -108,7 +107,9 @@
   --tw-contain-paint:  ;
   --tw-contain-style:  ;
 }
-/* ! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com */
+/*
+! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+*/
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
@@ -35747,7 +35748,6 @@ video {
 .forced-color-adjust-none{
   forced-color-adjust: none;
 }
-/* } */
 .placeholder\:text-secondary-500::-moz-placeholder{
   --tw-text-opacity: 1;
   color: rgb(130 146 170 / var(--tw-text-opacity, 1));
@@ -36279,6 +36279,7 @@ video {
 .\[\&\>tr\]\:last\:border-b-0:last-child>tr{
   border-bottom-width: 0px;
 }
+
 
 
 /*# sourceMappingURL=style-index.css.map*/

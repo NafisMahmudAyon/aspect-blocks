@@ -10,7 +10,6 @@ $textTag = isset($text['tag']) ? $text['tag'] : '';
 $textId = isset($text['id']) ? $text['id'] : '';
 $textContent = isset($text['content']) ? $text['content'] : '';
 ?>
-<<?php echo WPTW_tag_escape($textTag); ?> class="<?php echo esc_attr($textClass); ?>"
-  id="<?php echo esc_attr($textId); ?>">
+<<?php echo esc_html($textTag); ?> class="<?php echo esc_attr($textClass); ?>" id="<?php echo esc_attr($textId); ?>">
   <?php echo wp_kses_post($textContent) ?>
-</<?php echo WPTW_tag_escape($textTag); ?>>
+</<?php echo esc_html($textTag); ?>>

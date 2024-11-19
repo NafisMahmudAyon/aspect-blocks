@@ -129,6 +129,7 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 
 	return (
 		<div className="relative w-full">
+			<label htmlFor="">Add Classes</label>
 			<textarea
 				ref={inputRef}
 				value={inputValue}

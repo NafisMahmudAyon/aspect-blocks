@@ -1,6 +1,5 @@
-/* .my-unique-plugin-wrapper-class { */
 @import "aspect-ui/css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* } */
+

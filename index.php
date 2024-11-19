@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: WP Tailwind Blocks
+  Plugin Name: Tailwind Blocks
   Version: 1.0
   Author: NafisMahmudAyon
   Author URI: https://nafisbd.com/
@@ -18,9 +18,9 @@ function enqueue_tailwind_cdn()
   // Enqueue Tailwind CDN for both editor and frontend
   wp_enqueue_script(
     'tailwind-cdn',
-    'https://cdn.tailwindcss.com',
+    __DIR__.'/assets/tailwind.js',
     array(),
-    null,
+    '3.4.15',
     true // Load in footer
   );
 
@@ -55,10 +55,10 @@ add_action('enqueue_block_assets', 'enqueue_tailwind_cdn'); // For frontend and 
 require_once(__DIR__ . '/functions-blocks.php');
 
 // Register block types
-function register_wp_tailwind_blocks()
+function register_tailwind_blocks()
 {
   register_block_type(__DIR__ . '/build/text');
   register_block_type(__DIR__ . '/build/container');
 }
 
-add_action('init', 'register_wp_tailwind_blocks');
+add_action('init', 'register_tailwind_blocks');

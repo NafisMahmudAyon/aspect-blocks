@@ -1064,7 +1064,9 @@ const TailwindInput = ({
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "relative w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Add Classes"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     ref: inputRef,
     value: inputValue,
     onChange: e => handleInputChange(e) // Default textarea behavior
@@ -5378,7 +5380,7 @@ const twMerge = /*#__PURE__*/createTailwindMerge(getDefaultConfig);
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wp-tailwind/container","version":"0.1.0","title":"Container","category":"common","icon":"welcome-learn-more","attributes":{"container":{"type":"object","default":{"tag":"div","class":"","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"tailwind-blocks/container","version":"0.1.0","title":"Container","category":"common","icon":"welcome-learn-more","attributes":{"container":{"type":"object","default":{"tag":"div","class":"","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
@@ -5537,7 +5539,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkwp_tailwind_blocks"] = self["webpackChunkwp_tailwind_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunktailwind_blocks"] = self["webpackChunktailwind_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();

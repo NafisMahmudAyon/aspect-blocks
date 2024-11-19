@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const divsToUpdate = document.querySelectorAll(".wp-tailwind-container");
+const divsToUpdate = document.querySelectorAll("container");
 
 divsToUpdate.forEach((div) => {
 	try {
@@ -11,7 +11,7 @@ divsToUpdate.forEach((div) => {
 		console.log(data);
 		const root = ReactDOM.createRoot(div);
 		root.render(<OurComponent {...data} />);
-		div.classList.remove("wp-tailwind-container");
+		div.classList.remove("container");
 	} catch (error) {
 		console.error("Failed to parse JSON:", error);
 	}

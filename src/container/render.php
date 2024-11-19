@@ -8,7 +8,7 @@ $containerClass = isset($container['class']) ? $container['class'] : '';
 $containerTag = isset($container['tag']) ? $container['tag'] : '';
 $containerId = isset($container['id']) ? $container['id'] : '';
 ?>
-<<?php echo WPTW_tag_escape($containerTag); ?> class="<?php echo esc_attr($containerClass); ?>"
+<<?php echo esc_html($containerTag); ?> class="<?php echo esc_attr($containerClass); ?>"
   id="<?php echo esc_attr($containerId); ?>">
-  <?php echo ($content) ?>
-</<?php echo WPTW_tag_escape($containerTag); ?>>
+  <?php echo esc_html($content) ?>
+</<?php echo esc_html($containerTag); ?>>

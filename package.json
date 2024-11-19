@@ -1,5 +1,5 @@
 {
-  "name": "wp-tailwind-blocks",
+  "name": "tailwind-blocks",
   "version": "1.0.0",
   "description": "WordPress Tailwind Blocks",
   "main": "index.js",
@@ -17,8 +17,13 @@
     "zip": "wp-scripts plugin-zip",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "build",
+    "index.php",
+    "functions.blocks.php"
+  ],
   "keywords": [],
-  "author": "",
+  "author": "Nafis Mahmud Ayon <nafismahmudayon@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@wordpress/scripts": "^27.9.0",
