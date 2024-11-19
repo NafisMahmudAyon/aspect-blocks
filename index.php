@@ -12,13 +12,16 @@
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
+define('tailwind_blocks_plugin_url',
+  plugins_url('/', __FILE__)
+);
 // Enqueue Tailwind CDN for frontend and editor
 function enqueue_tailwind_cdn()
 {
   // Enqueue Tailwind CDN for both editor and frontend
   wp_enqueue_script(
     'tailwind-cdn',
-    __DIR__.'/assets/tailwind.js',
+    tailwind_blocks_plugin_url.'/assets/tailwind.js',
     array(),
     '3.4.15',
     true // Load in footer
