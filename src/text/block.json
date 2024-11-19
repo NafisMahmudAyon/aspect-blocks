@@ -7,18 +7,17 @@
   "category": "common",
   "icon": "welcome-learn-more",
   "attributes": {
-    "skyColor": {
-      "type": "string"
-    },
-    "class": {
-      "type": "string"
-    },
-    "grassColor": {
-      "type": "string"
+    "text": {
+      "type": "object",
+      "default": {
+        "tag": "div",
+        "class": "",
+        "content": "",
+        "id": ""
+      }
     }
   },
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
-  "render": "file:./render.php",
-  "viewScript": "file:./frontend.js"
+  "render": "file:./render.php"
 }

@@ -1204,10 +1204,10 @@ let modifiers = {
 
 /***/ }),
 
-/***/ "./src/text/index.js":
-/*!***************************!*\
-  !*** ./src/text/index.js ***!
-  \***************************/
+/***/ "./src/container/index.js":
+/*!********************************!*\
+  !*** ./src/container/index.js ***!
+  \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1218,7 +1218,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/text/block.json");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/container/block.json");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Style */ "./src/components/Style.jsx");
@@ -1231,19 +1231,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import TailwindInput from "../../components/TailwindInput";
 
 
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
-  edit: EditComponent
+  edit: EditComponent,
+  save: SaveComponent
 });
 function EditComponent(props) {
   var attributes = props.attributes;
   var setAttributes = props.setAttributes;
-  var text = attributes.text;
-  const [textClass, setTextClass] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(text.class);
-  const CustomTag = text.tag;
+  var container = attributes.container;
+  const [containerClass, setContainerClass] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(container.class);
+  const CustomTag = container.tag;
   const tagNameOptions = [
   // { label: "a", value: "a" },
   {
@@ -1275,26 +1277,44 @@ function EditComponent(props) {
     value: "p"
   }];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
-    setTextClass(text.class);
-  }, [text.class]);
+    setContainerClass(container.class);
+  }, [container.class]);
+  function updateSkyColor(e) {
+    props.setAttributes({
+      skyColor: e.target.value
+    });
+  }
+  // function updateClass(e) {
+  // 	props.setAttributes({ class: e.target.value });
+  // }
   function updateTailwindClass(e) {
     setAttributes({
-      text: {
-        ...text,
+      container: {
+        ...container,
         class: e
       }
     });
   }
-  function updateTextId(e) {
+  function updateContainerId(e) {
     setAttributes({
-      text: {
-        ...text,
+      container: {
+        ...container,
         id: e.target.value
       }
     });
   }
+  function updateGrassColor(e) {
+    props.setAttributes({
+      grassColor: e.target.value
+    });
+  }
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: `${textClass} `
+    className: `${containerClass}`
+  });
+  const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
+    directInsert: true,
+    templateInsertUpdatesSelection: true,
+    renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.ButtonBlockAppender
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-primary-200"
@@ -1307,43 +1327,42 @@ function EditComponent(props) {
   }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabContent, {
     value: "item-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Input__WEBPACK_IMPORTED_MODULE_8__.Input, {
-    label: "ID",
+    label: "ID"
+    // className="mr-3 p-2 rounded-lg"
+    ,
     type: "text",
-    value: text.id,
-    onChange: updateTextId,
+    value: container.id,
+    onChange: updateContainerId,
     placeholder: "sky color..."
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.Dropdown, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownAction, null, text.tag.length > 0 ? tagNameOptions.find(option => option.value === text.tag)?.label : "Select Tag Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownContent, null, tagNameOptions.map((option, index) => {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.Dropdown, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownAction, null, container.tag.length > 0 ? tagNameOptions.find(option => option.value === container.tag)?.label : "Select Tag Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownContent, null, tagNameOptions.map((option, index) => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownList, {
       key: index,
       onClick: () => {
         setAttributes({
-          text: {
-            ...text,
+          container: {
+            ...container,
             tag: option.value
           }
         });
       }
     }, option.label);
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabContent, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    className: "mr-3 p-2 rounded-lg",
+    type: "container",
+    value: attributes.grassColor,
+    onChange: updateGrassColor,
+    placeholder: "grass color..."
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabContent, {
     value: "item-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_6__["default"], {
     update: updateTailwindClass,
-    val: text.class
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    ...blockProps,
-    tagName: CustomTag,
-    value: text.content,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: value => {
-      setAttributes({
-        text: {
-          ...text,
-          content: value
-        }
-      });
-    },
-    placeholder: "Start Writing..."
-  }));
+    val: container.class
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
+    ...innerBlocksProps
+  }, innerBlocksProps.children));
+}
+function SaveComponent() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null);
 }
 
 /***/ }),
@@ -5353,13 +5372,13 @@ const twMerge = /*#__PURE__*/createTailwindMerge(getDefaultConfig);
 
 /***/ }),
 
-/***/ "./src/text/block.json":
-/*!*****************************!*\
-  !*** ./src/text/block.json ***!
-  \*****************************/
+/***/ "./src/container/block.json":
+/*!**********************************!*\
+  !*** ./src/container/block.json ***!
+  \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wp-tailwind/text","version":"0.1.0","title":"Text","category":"common","icon":"welcome-learn-more","attributes":{"text":{"type":"object","default":{"tag":"div","class":"","content":"","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wp-tailwind/container","version":"0.1.0","title":"Container","category":"common","icon":"welcome-learn-more","attributes":{"container":{"type":"object","default":{"tag":"div","class":"","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
@@ -5475,7 +5494,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"text/index": 0,
+/******/ 			"container/index": 0,
 /******/ 			"container/style-index": 0
 /******/ 		};
 /******/ 		
@@ -5528,7 +5547,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["container/style-index"], () => (__webpack_require__("./src/text/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["container/style-index"], () => (__webpack_require__("./src/container/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

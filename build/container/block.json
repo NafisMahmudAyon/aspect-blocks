@@ -1,18 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "wp-tailwind/text",
+  "name": "wp-tailwind/container",
   "version": "0.1.0",
-  "title": "Text",
+  "title": "Container",
   "category": "common",
   "icon": "welcome-learn-more",
   "attributes": {
-    "text": {
+    "container": {
       "type": "object",
       "default": {
         "tag": "div",
         "class": "",
-        "content": "",
         "id": ""
       }
     }
