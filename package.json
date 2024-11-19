@@ -20,7 +20,7 @@
   "files": [
     "build",
     "index.php",
-    "functions.blocks.php"
+    "functions-blocks.php"
   ],
   "keywords": [],
   "author": "Nafis Mahmud Ayon <nafismahmudayon@gmail.com>",

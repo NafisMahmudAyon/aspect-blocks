@@ -10,5 +10,5 @@ $containerId = isset($container['id']) ? $container['id'] : '';
 ?>
 <<?php echo esc_html($containerTag); ?> class="<?php echo esc_attr($containerClass); ?>"
   id="<?php echo esc_attr($containerId); ?>">
-  <?php echo esc_html($content) ?>
+  <?php echo $content ?>
 </<?php echo esc_html($containerTag); ?>>
