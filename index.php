@@ -5,6 +5,7 @@
   Author: NafisMahmudAyon
   Author URI: https://nafisbd.com/
   Description: WordPress Tailwind Blocks.
+  TExt Domain: tailwind-blocks
   Plugin URI: https://github.com/NafisMahmudAyon/
   License: GPLv2 or later
   License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -52,16 +53,29 @@ tailwind.config = {
 };
 EOT;
   wp_add_inline_script('tailwind-cdn', $tailwind_config);
+  
+  // Enqueue additional CSS file
+  // wp_enqueue_style(
+  //   'tailwind-blocks-style',
+  //   tailwind_blocks_plugin_url . '/build/style.css',
+  //   array(),
+  //   '1.0',
+  //   'all'
+  // );
 }
 add_action('enqueue_block_assets', 'enqueue_tailwind_cdn'); // For frontend and editor
+
+
 
 require_once(__DIR__ . '/functions-blocks.php');
 
 // Register block types
 function register_tailwind_blocks()
 {
-  register_block_type(__DIR__ . '/build/text');
-  register_block_type(__DIR__ . '/build/container');
+  register_block_type(__DIR__ . '/build/blocks/text');
+  register_block_type(__DIR__ . '/build/blocks/container');
+  register_block_type(__DIR__ . '/build/blocks/accordion');
+  register_block_type(__DIR__ . '/build/blocks/accordion-item');
 }
 
 add_action('init', 'register_tailwind_blocks');

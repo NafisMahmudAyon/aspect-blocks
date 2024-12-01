@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "tailwind-blocks/accordion-item",
+  "version": "0.1.0",
+  "title": "Accordion Item",
+  "category": "tailwind-blocks",
+  "icon": "welcome-learn-more",
+  "parent": [
+    "tailwind-blocks/accordion"
+  ],
+  "attributes": {
+    "accordionItem": {
+      "type": "object",
+      "default": {
+        "tag": "div",
+        "headerTag": "div",
+        "contentTag": "div",
+        "headerTitle": "Accordion Item Header",
+        "open": false,
+        "disabled": false,
+        "openIcon": "chevron-down-icon",
+        "openIconType": "solid",
+        "closeIcon": "",
+        "closeIconType": "solid",
+        "iconClass": "",
+        "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "accordionHeaderClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "accordionHeaderTitleClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "accordionContentClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "accordionIconClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": "size-6 inline-flex"
+        },
+        "id": ""
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./frontend.js"
+}

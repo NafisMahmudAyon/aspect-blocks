@@ -1,5 +1,39 @@
 @import "aspect-ui/css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.tailwind-blocks .block-editor-button-block-appender{
+  box-shadow: none;
+  border: 1px dashed;
+  border-color: hsl(0, 3%, 12%);
+  color: slategray;
+  border-radius: 4px;
+  transition: all;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+  &:hover{
+    border: 2px dashed hsl(0, 3%, 22%);
+    border-radius: 8px;
+    color: slategrey;
+  }
+}
+
+.tailwind-blocks-accordion-content {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.tailwind-blocks-accordion-content.open {
+  height: auto;
+}
+
+.tailwind-blocks-accordion-icon.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+.tailwind-blocks-editor-settings{
+font-family: "Poppins", sans-serif;
+}

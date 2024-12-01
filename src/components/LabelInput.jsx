@@ -5,10 +5,13 @@ const LabelInput = () => {
   return (
 		<div>
 			<Input
-				className="mr-3 p-2 rounded-lg"
+			wrapperClassName='flex items-center'
+				className="mr-3 p-2 rounded-lg bg-red-500 text"
+				label='ID'
 				type="text"
-				value={attributes.skyColor}
-				onChange={updateSkyColor}
+				icon={false}
+				// value={attributes.skyColor}
+				// onChange={updateSkyColor}
 				placeholder="sky color..."
 			/>
 		</div>

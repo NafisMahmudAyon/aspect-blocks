@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "tailwind-blocks/text",
+  "version": "0.1.0",
+  "title": "Text",
+  "category": "tailwind-blocks",
+  "icon": "welcome-learn-more",
+  "example": {
+    "attributes": {
+      "text": {
+        "tag": "p",
+        "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": "text-primary-900 font-medium text-[30px] text-center"
+        },
+        "content": "Hello World!",
+        "id": ""
+      }
+    }
+  },
+  "attributes": {
+    "text": {
+      "type": "object",
+      "default": {
+        "tag": "p",
+        "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "content": "Hello World!",
+        "id": ""
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

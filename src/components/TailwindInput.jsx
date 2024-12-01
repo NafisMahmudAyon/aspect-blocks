@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { tailwindCSS } from "./tailwindClasses";
 
-const TailwindInput = ({ update, customClasses = [], val }) => {
+const TailwindInput = ({ update, val }) => {
 	const [inputValue, setInputValue] = useState(val || "");
 	const [suggestions, setSuggestions] = useState([]);
 	const [showSuggestions, setShowSuggestions] = useState(false);
@@ -10,15 +10,14 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 	const activeSuggestionRef = useRef(null);
 
 	useEffect(() => {
-		setInputValue(val)
+		// console.log(val)
+		setInputValue(val);
 	}, [val]);
+	console.log(val)
 
-	const tailwindClasses = useMemo(
-		() => [...tailwindCSS, ...customClasses],
-		[customClasses],
-	);
+	const tailwindClasses = tailwindCSS;
 
-	// Debounce mechanism to delay filtering
+	// Debounce mechanism
 	const debounce = (func, delay) => {
 		let timer;
 		return (...args) => {
@@ -27,62 +26,62 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 		};
 	};
 
-	// Handle input change with suggestion filtering
-	const handleInputChange = (e) => {
-		const value = e.target.value;
-		setInputValue(value); // Update state for normal textarea behavior
-		update(value); // Notify parent of value change
-		filterSuggestions(value); // Update suggestions based on the value
-	};
-
-	// Filter suggestions based on the current word
-	const filterSuggestions = debounce((value) => {
-		const currentWord = value.split(" ").pop(); // Get the last word being typed
-		if (currentWord) {
-			let filtered = [];
-
-			if (currentWord.includes(":")) {
-				// Handle modifier-based filtering
-				const [modifier, rest] = currentWord.split(":");
-				if (!rest) {
-					// If no rest, suggest all classes with modifier
-					filtered = tailwindClasses.map(
-						(className) => `${modifier}:${className}`,
-					);
-				} else {
-					// Filter classes based on `rest` using dynamic first-letter matching
-					const pattern = rest.toLowerCase();
-					filtered = tailwindClasses
-						.filter((className) => {
-							const words = className.split("-");
-							return words.every((word, index) => {
-								const letter = pattern[index];
-								return letter && word.startsWith(letter);
-							});
-						})
-						.map((className) => `${modifier}:${className}`);
-				}
-			} else {
-				// Handle dynamic first-letter matching for non-modifier classes
-				const pattern = currentWord.toLowerCase();
-				filtered = tailwindClasses.filter((className) => {
-					const words = className.split("-");
-					return words.every((word, index) => {
-						const letter = pattern[index];
-						return letter && word.startsWith(letter);
-					});
-				});
-			}
-
-			setSuggestions(filtered);
-			setShowSuggestions(filtered.length > 0);
-			setActiveSuggestionIndex(0); // Reset active index
-		} else {
+	const debounceFilterSuggestions = debounce((value) => {
+		const currentWord = value.split(" ").pop().trim(); // Get the last word
+		if (!currentWord) {
 			setSuggestions([]);
 			setShowSuggestions(false);
+			return;
 		}
+
+		let filtered = [];
+		if (currentWord.includes(":")) {
+			// Handle modifier filtering
+			const [modifier, rest] = currentWord.split(":");
+			const prefix = `${modifier}:`;
+			filtered =
+				rest?.length > 0
+					? tailwindClasses
+							.filter((className) =>
+								className.toLowerCase().startsWith(rest.toLowerCase()),
+							)
+							.map((className) => `${prefix}${className}`)
+					: tailwindClasses.map((className) => `${prefix}${className}`);
+		} else if (/^[a-z]+$/i.test(currentWord)) {
+			// Handle shorthand matching
+			const pattern = currentWord.toLowerCase();
+			filtered = tailwindClasses.filter((className) => {
+				const words = className.split("-");
+				return pattern.split("").every((char, index) => {
+					return words[index] && words[index].startsWith(char);
+				});
+			});
+		} else {
+			// Handle substring matching
+			const pattern = currentWord.toLowerCase();
+			filtered = tailwindClasses.filter((className) =>
+				className.toLowerCase().includes(pattern),
+			);
+		}
+
+		// Keep suggestions visible even if no matches
+		if (filtered.length === 0) {
+			filtered = tailwindClasses.filter((className) =>
+				className.toLowerCase().includes(currentWord.toLowerCase()),
+			);
+		}
+
+		setSuggestions(filtered);
+		setShowSuggestions(true); // Always show suggestions until space or clear
+		setActiveSuggestionIndex(0);
 	}, 300);
 
+	const handleInputChange = (e) => {
+		const value = e.target.value;
+		setInputValue(value);
+		update(value);
+		debounceFilterSuggestions(value);
+	};
 
 	// Scroll active suggestion into view
 	useEffect(() => {
@@ -94,7 +93,6 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 		}
 	}, [activeSuggestionIndex]);
 
-	// Handle keyboard navigation for suggestions
 	const handleKeyDown = (e) => {
 		if (e.key === "ArrowDown") {
 			setActiveSuggestionIndex((prevIndex) =>
@@ -110,33 +108,38 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 		}
 	};
 
-	// Handle suggestion selection
 	const selectSuggestion = (suggestion) => {
 		const words = inputValue.split(" ");
-		words.pop(); // Remove the current word
-		const updatedValue = [...words, suggestion].join(" "); // Replace with suggestion
-		setInputValue(updatedValue); // Update the input value
-		update(updatedValue); // Notify parent of the selection
-		setShowSuggestions(false); // Hide suggestions
+		words.pop();
+		const updatedValue = [...words, suggestion].join(" ").trim();
+		setInputValue(updatedValue);
+		update(updatedValue);
+		setShowSuggestions(false);
 		setActiveSuggestionIndex(0);
-		inputRef.current.focus(); // Keep focus on the input
+		inputRef.current.focus();
 	};
 
-	// Handle suggestion click
 	const handleSuggestionClick = (suggestion) => {
 		selectSuggestion(suggestion);
 	};
 
+	const handleBlur = (e) => {
+		if (!e.relatedTarget || !e.relatedTarget.closest("ul")) {
+			setShowSuggestions(false);
+		}
+	};
+
 	return (
-		<div className="relative w-full">
-			<label htmlFor="">Add Classes</label>
+		<div className="relative w-full" onBlur={handleBlur}>
+			<label htmlFor="tailwind-input">Add Classes</label>
 			<textarea
+				id="tailwind-input"
 				ref={inputRef}
 				value={inputValue}
-				onChange={(e) => handleInputChange(e)} // Default textarea behavior
+				onChange={handleInputChange}
 				onKeyDown={handleKeyDown}
 				placeholder="Type Tailwind classes..."
-				className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500"
+				className="w-full h-max row-span-3 p-3 border rounded-md focus:ring-2 focus:ring-blue-500"
 				aria-expanded={showSuggestions}
 				aria-owns="suggestion-list"
 			/>
@@ -145,6 +148,7 @@ const TailwindInput = ({ update, customClasses = [], val }) => {
 					id="suggestion-list"
 					className="absolute left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border rounded shadow-md z-10"
 					role="listbox"
+					tabIndex="-1"
 				>
 					{suggestions.map((suggestion, index) => (
 						<li

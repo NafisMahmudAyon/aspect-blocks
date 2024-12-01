@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "tailwind-blocks/container",
+  "version": "0.1.0",
+  "title": "Container",
+  "category": "common",
+  "icon": "welcome-learn-more",
+  "attributes": {
+    "container": {
+      "type": "object",
+      "default": {
+        "tag": "div",
+        "class": {
+				"sm": "",
+				"md": "",
+				"desktop": "",
+				"custom": ""
+        },
+        "id": ""
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
