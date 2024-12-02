@@ -21,7 +21,7 @@
         "disabled": false,
         "openIcon": "chevron-down-icon",
         "openIconType": "solid",
-        "closeIcon": "",
+        "closeIcon": "chevron-up-icon",
         "closeIconType": "solid",
         "iconClass": "",
         "class": {
@@ -34,7 +34,7 @@
           "sm": "",
           "md": "",
           "desktop": "",
-          "custom": ""
+          "custom": "flex items-center justify-between"
         },
         "accordionHeaderTitleClass": {
           "sm": "",
@@ -60,6 +60,5 @@
   },
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
-  "render": "file:./render.php",
-  "viewScript": "file:./frontend.js"
+  "render": "file:./render.php"
 }

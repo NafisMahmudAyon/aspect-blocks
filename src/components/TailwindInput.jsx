@@ -13,7 +13,6 @@ const TailwindInput = ({ update, val }) => {
 		// console.log(val)
 		setInputValue(val);
 	}, [val]);
-	console.log(val)
 
 	const tailwindClasses = tailwindCSS;
 

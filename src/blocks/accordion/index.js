@@ -9,20 +9,12 @@ import {
 import { registerBlockType } from "@wordpress/blocks";
 import metadata from "./block.json";
 // import TailwindInput from "../../components/TailwindInput";
-import {
-	Dropdown,
-	DropdownAction,
-	DropdownContent,
-	DropdownList,
-} from "aspect-ui/Dropdown";
-import { Input } from "aspect-ui/Input";
-import { Switch } from "aspect-ui/Switch";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
-import Style from "../../components/Style";
-import { cn } from "../../components/utils/cn";
+import DropdownData from "../../components/block-components/dropdown-data";
 import InputData from "../../components/block-components/input-data";
 import SwitchData from "../../components/block-components/switch-data";
-import DropdownData from "../../components/block-components/dropdown-data";
+import Style from "../../components/Style";
+import { cn } from "../../components/utils/cn";
 
 registerBlockType(metadata.name, { edit: EditComponent, save: SaveComponent });
 
@@ -77,7 +69,6 @@ function EditComponent(props) {
 		allowedBlocks: ALLOWED_BLOCKS,
 		directInsert: true,
 		template: MY_TEMPLATE,
-		// templateInsertUpdatesSelection: true,
 		renderAppender: InnerBlocks.ButtonBlockAppender,
 	});
 
@@ -97,17 +88,6 @@ function EditComponent(props) {
 								val={accordion.multiple}
 								update={handleMultipleChange}
 							/>
-							{/* <Switch
-								className="w-full inline-flex flex-row-reverse gap-3 justify-between"
-								labelClassName="text-primary-900 dark:text-primary-900 ml-0 font-medium"
-								activeClassName="bg-black"
-								deactiveClassName="bg-primary-200"
-								deactiveSwitchClassName="bg-black"
-								activeSwitchClassName="bg-primary-200"
-								checked={accordion.multiple}
-								onChange={handleMultipleChange}
-								label="Open Multiple"
-							/> */}
 							<DropdownData
 								label="Accordion Tag"
 								options={tagNameOptions}

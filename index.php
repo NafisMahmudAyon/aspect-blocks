@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Tailwind Blocks
-  Version: 1.0
+  Version: 1.1
   Author: NafisMahmudAyon
   Author URI: https://nafisbd.com/
   Description: WordPress Tailwind Blocks.
@@ -13,7 +13,8 @@
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-define('tailwind_blocks_plugin_url',
+define(
+  'tailwind_blocks_plugin_url',
   plugins_url('/', __FILE__)
 );
 // Enqueue Tailwind CDN for frontend and editor
@@ -22,14 +23,14 @@ function enqueue_tailwind_cdn()
   // Enqueue Tailwind CDN for both editor and frontend
   wp_enqueue_script(
     'tailwind-cdn',
-    tailwind_blocks_plugin_url.'/assets/tailwind.js',
+    tailwind_blocks_plugin_url . '/assets/tailwind.js',
     array(),
     '3.4.15',
     true // Load in footer
   );
 
   // Add inline script to initialize Tailwind with custom configuration
-  $tailwind_config = <<<EOT
+  $tailwind_config = `
 tailwind.config = {
   theme: {
     extend: {
@@ -50,10 +51,9 @@ tailwind.config = {
       }
     }
   }
-};
-EOT;
+};`;
   wp_add_inline_script('tailwind-cdn', $tailwind_config);
-  
+
   // Enqueue additional CSS file
   // wp_enqueue_style(
   //   'tailwind-blocks-style',
@@ -76,6 +76,7 @@ function register_tailwind_blocks()
   register_block_type(__DIR__ . '/build/blocks/container');
   register_block_type(__DIR__ . '/build/blocks/accordion');
   register_block_type(__DIR__ . '/build/blocks/accordion-item');
+  register_block_type(__DIR__ . '/build/blocks/post-title');
 }
 
 add_action('init', 'register_tailwind_blocks');

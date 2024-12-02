@@ -840,10 +840,10 @@ const cn = (...args) => {
 
 /***/ }),
 
-/***/ "./src/blocks/text/index.js":
-/*!**********************************!*\
-  !*** ./src/blocks/text/index.js ***!
-  \**********************************/
+/***/ "./src/blocks/post-title/index.js":
+/*!****************************************!*\
+  !*** ./src/blocks/post-title/index.js ***!
+  \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -854,12 +854,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
-/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
-/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
-/* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./block.json */ "./src/blocks/text/block.json");
-/* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/Style */ "./src/components/Style.jsx");
+/* harmony import */ var aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aspect-ui/Accordion */ "./node_modules/aspect-ui/lib/cjs/components/Accordion/index.js");
+/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
+/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
+/* harmony import */ var _components_block_components_link_picker__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/block-components/link-picker */ "./src/components/block-components/link-picker.jsx");
+/* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/Style */ "./src/components/Style.jsx");
+/* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./block.json */ "./src/blocks/post-title/block.json");
+
 
 
 
@@ -897,8 +899,11 @@ const tagNameOptions = [{
 }, {
   label: "P",
   value: "p"
+}, {
+  label: "a",
+  value: "a"
 }];
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_8__.name, {
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_10__.name, {
   edit: EditComponent
 });
 function EditComponent({
@@ -906,15 +911,15 @@ function EditComponent({
   setAttributes
 }) {
   const {
-    text
+    title
   } = attributes;
-  const CustomTag = text.tag || "div";
+  const CustomTag = title.tag || "div";
 
   // Helper to update text attributes
-  const updateTextAttribute = (key, value) => {
+  const updateTitleAttribute = (key, value) => {
     setAttributes({
-      text: {
-        ...text,
+      title: {
+        ...title,
         [key]: value
       }
     });
@@ -922,42 +927,97 @@ function EditComponent({
 
   // Block properties with dynamic classes
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_7__.cn)("tailwind-blocks tailwind-blocks-text", text.class?.sm, text.class?.md, text.class?.desktop, text.class?.custom)
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_9__.cn)("tailwind-blocks tailwind-blocks-text", title.class?.sm, title.class?.md, title.class?.desktop, title.class?.custom)
   });
+  const linkToOptions = [{
+    label: "Choose",
+    value: ""
+  }, {
+    label: "Post URL",
+    value: "postUrl"
+  }, {
+    label: "Home URL",
+    value: "homeUrl"
+  }, {
+    label: "Custom Field",
+    value: "customField"
+  }, {
+    label: "Custom URL",
+    value: "customUrl"
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "tailwind-blocks-editor-settings"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.Tabs, {
+    className: "tailwind-blocks-editor-settings mb-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.Accordion, {
+    iconPosition: "right"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "post-title",
+    className: " border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
+    className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
+    activeHeaderClassName: "border-b"
+  }, "Post Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.TabList, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, {
     className: "px-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1",
     className: "space-y-3 py-3 px-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    val: text.id,
-    update: e => updateTextAttribute("id", e.target.value)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: "Tag",
     options: tagNameOptions,
-    value: text.tag,
-    update: e => updateTextAttribute("tag", e.target.value)
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_4__.TabContent, {
+    value: title.tag,
+    update: e => updateTitleAttribute("tag", e.target.value)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    update: e => updateTextAttribute("class", e),
-    val: text.class
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    ...blockProps,
-    tagName: CustomTag,
-    value: text.content,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: value => updateTextAttribute("content", value),
-    placeholder: "Start Writing..."
-  }));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    update: e => updateTitleAttribute("class", e),
+    val: title.class
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "link",
+    className: " border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
+    className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
+    activeHeaderClassName: "border-b"
+  }, "Link To"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 border-0 px-3 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
+    defaultActive: "item-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, {
+    className: "px-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
+    value: "item-1"
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
+    value: "item-2"
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
+    value: "item-1",
+    className: "space-y-3 py-3 px-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_link_picker__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    customUrlValue: title.customUrl,
+    linkPickerOptions: linkToOptions,
+    linkTargetValue: title.linkTarget,
+    linkToValue: title.linkTo,
+    customMetaKey: title.metaKey,
+    updateLinkTo: e => updateTitleAttribute("linkTo", e.target.value),
+    updateLinkTarget: e => updateTitleAttribute("linkTarget", e.target.value),
+    updateCustomUrl: e => updateTitleAttribute("customUrl", e.target.value),
+    updateCustomMetaKey: e => updateTitleAttribute("metaKey", e.target.value)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
+    value: "item-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    update: e => updateTitleAttribute("linkClass", e),
+    val: title.linkClass
+  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
+    ...blockProps
+  }, title.linkTo.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    href: "#",
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_9__.cn)(title.linkClass?.sm, title.linkClass?.md, title.linkClass?.desktop, title.linkClass?.custom)
+  }, title.content), title.linkTo.length == 0 && title.content));
 }
 
 /***/ }),
@@ -2578,6 +2638,78 @@ const InputData = ({
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputData);
+
+/***/ }),
+
+/***/ "./src/components/block-components/link-picker.jsx":
+/*!*********************************************************!*\
+  !*** ./src/components/block-components/link-picker.jsx ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _input_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./input-data */ "./src/components/block-components/input-data.jsx");
+
+
+const LinkPicker = ({
+  linkToValue,
+  linkTargetValue,
+  customUrlValue,
+  customMetaKey,
+  linkPickerOptions,
+  updateLinkTo,
+  updateLinkTarget,
+  updateCustomUrl,
+  updateCustomMetaKey
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "space-y-3 !text-[11px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center justify-between"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "link-to"
+  }, "Link To"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: updateLinkTo,
+    value: linkToValue,
+    className: "!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
+  }, linkPickerOptions.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: index,
+    value: option.value,
+    className: ""
+  }, option.label)))), linkToValue.length > 0 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center justify-between"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "link-target"
+  }, "Link Target"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: updateLinkTarget,
+    value: linkTargetValue,
+    className: "!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "_self"
+  }, "_self"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "_blank"
+  }, "_blank"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "_parent"
+  }, "_parent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    value: "_top"
+  }, "_top"))), linkToValue === "customUrl" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_data__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: "Custom URL",
+    placeholder: "Enter a URL",
+    val: customUrlValue,
+    update: updateCustomUrl
+  })), linkToValue === "customField" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_data__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    label: "Meta Key",
+    placeholder: "Enter a meta key",
+    val: customMetaKey,
+    update: updateCustomMetaKey
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LinkPicker);
 
 /***/ }),
 
@@ -21632,13 +21764,13 @@ const twMerge = /*#__PURE__*/createTailwindMerge(getDefaultConfig);
 
 /***/ }),
 
-/***/ "./src/blocks/text/block.json":
-/*!************************************!*\
-  !*** ./src/blocks/text/block.json ***!
-  \************************************/
+/***/ "./src/blocks/post-title/block.json":
+/*!******************************************!*\
+  !*** ./src/blocks/post-title/block.json ***!
+  \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"tailwind-blocks/text","version":"0.1.0","title":"Text","category":"tailwind-blocks","icon":"welcome-learn-more","example":{"attributes":{"text":{"tag":"p","class":{"sm":"","md":"","desktop":"","custom":"text-primary-900 font-medium text-[30px] text-center"},"content":"Hello World!","id":""}}},"attributes":{"text":{"type":"object","default":{"tag":"p","class":{"sm":"","md":"","desktop":"","custom":""},"content":"Hello World!","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"tailwind-blocks/post-title","version":"0.1.0","title":"Post Title","category":"tailwind-blocks","icon":"welcome-learn-more","usesContext":["postId","loopIndex","postType","queryId"],"example":{"attributes":{"title":{"tag":"p","limitBy":"","limitCount":99,"linkTo":"postUrl","linkTarget":"_blank","linkAttr":[],"metaKey":"","customUrl":"","class":{"sm":"","md":"","desktop":"","custom":"text-primary-900 font-medium text-[30px] text-center bg-primary-200 border-l-4 border-l-primary-900"},"linkClass":{"sm":"","md":"","desktop":"","custom":""},"content":"The quick brown fox jumps over the lazy dog","id":""}}},"attributes":{"title":{"type":"object","default":{"tag":"p","limitBy":"","limitCount":99,"linkTo":"postUrl","linkTarget":"_self","linkAttr":[],"metaKey":"","customUrl":"","class":{"sm":"","md":"","desktop":"","custom":""},"linkClass":{"sm":"","md":"","desktop":"","custom":""},"content":"The quick brown fox jumps over the lazy dog","id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
@@ -21754,7 +21886,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"blocks/text/index": 0,
+/******/ 			"blocks/post-title/index": 0,
 /******/ 			"blocks/accordion/style-index": 0
 /******/ 		};
 /******/ 		
@@ -21807,7 +21939,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["blocks/accordion/style-index"], () => (__webpack_require__("./src/blocks/text/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["blocks/accordion/style-index"], () => (__webpack_require__("./src/blocks/post-title/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

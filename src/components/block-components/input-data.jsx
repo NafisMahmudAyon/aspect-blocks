@@ -5,7 +5,7 @@ const InputData = ({val, update, label="ID", placeholder="id"}) => {
   return (
 		<Input
 			label={label}
-			className="placeholder:text-primary-200"
+			className="placeholder:text-primary-200 text-[11px] !border !border-gray-300 !rounded-md"
 			wrapperClassName="w-full inline-flex items-center gap-3 justify-between mb-0"
       labelClassName='mb-0 text-[11px]'
 			icon={false}

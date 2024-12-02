@@ -1,5 +1,4 @@
 import "../../style.css";
-
 import {
 	InspectorControls,
 	InnerBlocks,
@@ -8,8 +7,7 @@ import {
 } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
 import metadata from "./block.json";
-import { useEffect, useState } from "@wordpress/element";
-// import TailwindInput from "../../components/TailwindInput";
+import { useEffect } from "@wordpress/element";
 import Style from "../../components/Style";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
 import { Input } from "aspect-ui/Input";
@@ -20,54 +18,64 @@ import {
 	DropdownList,
 } from "aspect-ui/Dropdown";
 import { cn } from "../../components/utils/cn";
+import DropdownData from "../../components/block-components/dropdown-data";
+import InputData from "../../components/block-components/input-data";
 
+// Constants
+const tagNameOptions = [
+	{ label: "H1", value: "h1" },
+	{ label: "H2", value: "h2" },
+	{ label: "H3", value: "h3" },
+	{ label: "H4", value: "h4" },
+	{ label: "H5", value: "h5" },
+	{ label: "H6", value: "h6" },
+	{ label: "SPAN", value: "span" },
+	{ label: "DIV", value: "div" },
+	{ label: "P", value: "p" },
+];
+
+// Block Registration
 registerBlockType(metadata.name, { edit: EditComponent, save: SaveComponent });
 
-function EditComponent(props) {
-	var attributes = props.attributes;
-	var setAttributes = props.setAttributes;
-	var container = attributes.container;
-	const [containerClass, setContainerClass] = useState(container.class);
-	const CustomTag = container.tag;
-	const tagNameOptions = [
-		// { label: "a", value: "a" },
-		{ label: "H1", value: "h1" },
-		{ label: "H2", value: "h2" },
-		{ label: "H3", value: "h3" },
-		{ label: "H4", value: "h4" },
-		{ label: "H5", value: "h5" },
-		{ label: "H6", value: "h6" },
-		{ label: "SPAN", value: "span" },
-		{ label: "DIV", value: "div" },
-		{ label: "P", value: "p" },
-	];
+function EditComponent({ attributes, setAttributes }) {
+	const { container } = attributes;
+	const { id, tag, class: containerClass } = container;
+
 	useEffect(() => {
-		setContainerClass(container.class);
-	}, [container.class]);
-	function updateSkyColor(e) {
-		props.setAttributes({ skyColor: e.target.value });
-	}
-	// function updateClass(e) {
-	// 	props.setAttributes({ class: e.target.value });
-	// }
-	function updateTailwindClass(e) {
-		setAttributes({ container: { ...container, class: e } });
-	}
-	function updateContainerId(e) {
+		// Ensure state stays in sync
+		if (!containerClass) {
+			setAttributes({
+				container: {
+					...container,
+					class: { sm: "", md: "", desktop: "", custom: "" },
+				},
+			});
+		}
+	}, [containerClass, setAttributes]);
+
+	const CustomTag = container.tag || "div";
+
+	// Handlers
+	const updateTailwindClass = (classes) => {
+		setAttributes({ container: { ...container, class: classes } });
+	};
+
+	const updateContainerId = (e) => {
 		setAttributes({ container: { ...container, id: e.target.value } });
-	}
+	};
 
-	function updateGrassColor(e) {
-		props.setAttributes({ grassColor: e.target.value });
-	}
+	const updateContainerTag = (e) => {
+		setAttributes({ container: { ...container, tag: e.target.value } });
+	};
 
+	// Props
 	const blockProps = useBlockProps({
 		className: cn(
 			"tailwind-blocks",
-			container.class.sm,
-			container.class.md,
-			container.class.desktop,
-			container.class.custom,
+			containerClass?.sm,
+			containerClass?.md,
+			containerClass?.desktop,
+			containerClass?.custom,
 		),
 	});
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
@@ -76,59 +84,45 @@ function EditComponent(props) {
 		renderAppender: InnerBlocks.ButtonBlockAppender,
 	});
 
+	// Render
 	return (
 		<>
 			<InspectorControls>
-				<div className="bg-primary-200">
+				<div className=" p-3">
 					<Tabs defaultActive="item-1">
 						<TabList>
 							<TabItem value="item-1">Options</TabItem>
 							<TabItem value="item-2">Style</TabItem>
 						</TabList>
-						<TabContent value="item-1">
-							<Input
-								label="ID"
-								// className="mr-3 p-2 rounded-lg"
-								type="text"
-								value={container.id}
-								onChange={updateContainerId}
-								placeholder="sky color..."
+						<TabContent value="item-1" className="space-y-3">
+							<InputData val={id || ""} update={updateContainerId} />
+							<DropdownData
+								label="Tag"
+								options={tagNameOptions}
+								value={container.tag}
+								update={updateContainerTag}
 							/>
-							<Dropdown>
-								<DropdownAction>
-									{container.tag.length > 0
-										? tagNameOptions.find(
-												(option) => option.value === container.tag,
-										  )?.label
+							{/* <Dropdown>
+								<DropdownAction aria-label="Select tag name">
+									{tag
+										? tagNameOptions.find((option) => option.value === tag)
+												?.label
 										: "Select Tag Name"}
 								</DropdownAction>
 								<DropdownContent>
-									{tagNameOptions.map((option, index) => {
-										return (
-											<DropdownList
-												key={index}
-												onClick={() => {
-													setAttributes({
-														container: { ...container, tag: option.value },
-													});
-												}}
-											>
-												{option.label}
-											</DropdownList>
-										);
-									})}
+									{tagNameOptions.map((option) => (
+										<DropdownList
+											key={option.value}
+											onClick={() => updateContainerTag(option.value)}
+										>
+											{option.label}
+										</DropdownList>
+									))}
 								</DropdownContent>
-							</Dropdown>
-							<input
-								className="mr-3 p-2 rounded-lg"
-								type="container"
-								value={attributes.grassColor}
-								onChange={updateGrassColor}
-								placeholder="grass color..."
-							/>
+							</Dropdown> */}
 						</TabContent>
 						<TabContent value="item-2">
-							<Style update={updateTailwindClass} val={container.class} />
+							<Style update={updateTailwindClass} val={containerClass} />
 						</TabContent>
 					</Tabs>
 				</div>

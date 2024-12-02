@@ -28,10 +28,10 @@ const DropdownData = ({ label, options, value, update }) => {
 			<select
 				onChange={update}
 				value={value}
-				className="!text-[11px] !text-primary-900 hover:!text-primary-900"
+				className="!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
 			>
 				{options.map((option, index) => (
-					<option key={index} value={option.value}>
+					<option key={index} value={option.value} className="">
 						{option.label}
 					</option>
 				))}

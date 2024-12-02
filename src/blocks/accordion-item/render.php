@@ -29,8 +29,11 @@ $accordionItemOpenIconType = isset($accordionItem['openIconType']) ? $accordionI
 $accordionItemCloseIconType = isset($accordionItem['closeIconType']) ? $accordionItem['closeIconType'] : 'solid';
 ?>
 <<?php echo esc_html($accordionItemTag); ?>
-  class="tailwind-blocks tailwind-blocks-accordion-item <?php echo esc_attr($className); ?>"
-  id="<?php echo esc_attr($accordionItemId); ?>" data-open="<?php echo esc_attr($accordionItemOpen); ?>">
+  class="tailwind-blocks tailwind-blocks-accordion-item <?php echo esc_attr($className); ?><?php echo $accordionItemDisabled === true ? ' disabled' : ''; ?>"
+  id="<?php echo esc_attr($accordionItemId); ?>" <?php if ($accordionItemDisabled === true) { ?>disabled="true"
+  <?php } ?> data-open="<?php echo esc_attr($accordionItemOpen); ?>"
+  data-disabled="<?php echo esc_attr($accordionItemDisabled); ?>">
+
   <<?php echo esc_html($accordionItemHeaderTag); ?>
     class="tailwind-blocks-accordion-header <?php echo esc_attr($accordionHeaderClassName); ?>">
     <span
@@ -41,7 +44,7 @@ $accordionItemCloseIconType = isset($accordionItem['closeIconType']) ? $accordio
       data-close-icon="<?php echo esc_attr($accordionItemCloseIcon); ?>"
       data-open-icon-type="<?php echo esc_attr($accordionItemOpenIconType); ?>"
       data-close-icon-type="<?php echo esc_attr($accordionItemCloseIconType); ?>">
-      ▼</span>
+    </span>
   </<?php echo esc_html($accordionItemHeaderTag); ?>>
   <<?php echo esc_html($accordionItemContentTag); ?>
     class="tailwind-blocks-accordion-content <?php echo esc_attr($accordionContentClassName); ?>">

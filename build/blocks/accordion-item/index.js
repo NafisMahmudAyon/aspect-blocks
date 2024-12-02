@@ -905,23 +905,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/accordion-item/block.json");
-/* harmony import */ var aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aspect-ui/Accordion */ "./node_modules/aspect-ui/lib/cjs/components/Accordion/index.js");
-/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
-/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
-/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
-/* harmony import */ var _components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/block-components/switch-data */ "./src/components/block-components/switch-data.jsx");
-/* harmony import */ var _components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icons/IconListOutline */ "./src/components/icons/IconListOutline.jsx");
-/* harmony import */ var _components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/icons/IconListSolid */ "./src/components/icons/IconListSolid.jsx");
-/* harmony import */ var _components_icons_Icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/icons/Icons */ "./src/components/icons/Icons.jsx");
-/* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/Style */ "./src/components/Style.jsx");
-/* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
-
-
-
-
-
-// import TailwindInput from "../../components/TailwindInput";
+/* harmony import */ var aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aspect-ui/Accordion */ "./node_modules/aspect-ui/lib/cjs/components/Accordion/index.js");
+/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
+/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
+/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
+/* harmony import */ var _components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/block-components/switch-data */ "./src/components/block-components/switch-data.jsx");
+/* harmony import */ var _components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/icons/IconListOutline */ "./src/components/icons/IconListOutline.jsx");
+/* harmony import */ var _components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/icons/IconListSolid */ "./src/components/icons/IconListSolid.jsx");
+/* harmony import */ var _components_icons_Icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/icons/Icons */ "./src/components/icons/Icons.jsx");
+/* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/Style */ "./src/components/Style.jsx");
+/* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block.json */ "./src/blocks/accordion-item/block.json");
 
 
 
@@ -933,21 +927,58 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_14__.name, {
   edit: EditComponent,
   save: SaveComponent
 });
 function EditComponent(props) {
-  var attributes = props.attributes;
-  var setAttributes = props.setAttributes;
-  var accordionItem = attributes.accordionItem;
-  const CustomTag = accordionItem.tag;
-  const CustomHeaderTag = accordionItem.headerTag;
-  const CustomContentTag = accordionItem.contentTag;
-  const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  const tagNameOptions = [
-  // { label: "a", value: "a" },
-  {
+  const {
+    attributes,
+    setAttributes
+  } = props;
+  const {
+    accordionItem
+  } = attributes;
+  const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(accordionItem.open || true);
+
+  // Common Helper Functions
+  const updateAttribute = (key, value) => {
+    setAttributes({
+      accordionItem: {
+        ...accordionItem,
+        [key]: value
+      }
+    });
+  };
+  const updateClass = (key, value) => {
+    setAttributes({
+      accordionItem: {
+        ...accordionItem,
+        [key]: value
+      }
+    });
+  };
+  const renderIcon = (iconName, iconType) => {
+    const iconMap = iconType === "solid" ? _components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_10__["default"] : _components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_9__["default"];
+    const IconComponent = iconMap.find(icon => icon.name === iconName)?.icon;
+    return IconComponent ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(IconComponent, null) : null;
+  };
+
+  // Block Props
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_13__.cn)("tailwind-blocks tailwind-blocks-accordion-item-editor", accordionItem.class?.sm, accordionItem.class?.md, accordionItem.class?.desktop, accordionItem.class?.custom),
+    ...(accordionItem.disabled && {
+      disabled: true
+    })
+  });
+
+  // Tag Options
+  const tagNameOptions = [{
     label: "H1",
     value: "h1"
   }, {
@@ -975,296 +1006,166 @@ function EditComponent(props) {
     label: "P",
     value: "p"
   }];
-  function updateTailwindClass(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        class: e
-      }
-    });
-  }
-  function updateTailwindHeaderClass(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        accordionHeaderClass: e
-      }
-    });
-  }
-  function updateTailwindHeaderTitleClass(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        accordionHeaderTitleClass: e
-      }
-    });
-  }
-  function updateTailwindContentClass(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        accordionContentClass: e
-      }
-    });
-  }
-  function updateTailwindIconClass(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        accordionIconClass: e
-      }
-    });
-  }
-  function updateAccordionItemId(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        id: e.target.value
-      }
-    });
-  }
-  function updateAccordionItemTag(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        tag: e.target.value
-      }
-    });
-  }
-  function updateAccordionItemHeaderTag(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        headerTag: e.target.value
-      }
-    });
-  }
-  function updateAccordionItemContentTag(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        contentTag: e.target.value
-      }
-    });
-  }
-  function handleOpenChange(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        open: e
-      }
-    });
-  }
-  function handleDisabledChange(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        disabled: e
-      }
-    });
-  }
-  function handleOpenIconChange(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        openIcon: e
-      }
-    });
-  }
-  function handleCloseIconChange(e) {
-    setAttributes({
-      accordionItem: {
-        ...accordionItem,
-        closeIcon: e
-      }
-    });
-  }
-
-  // Creating the maps for solid and outline icons
-  const solidIconsMap = Object.fromEntries(_components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_11__["default"].map(item => [item.name, item.icon]));
-  const outlineIconsMap = Object.fromEntries(_components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_10__["default"].map(item => [item.name, item.icon]));
-  function renderIcon(iconName, iconType) {
-    const iconMap = iconType === "solid" ? solidIconsMap : outlineIconsMap;
-    const IconComponent = iconMap[iconName];
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(IconComponent, null);
-  }
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_14__.cn)("tailwind-blocks tailwind-blocks-accordion-item", accordionItem.class.sm, accordionItem.class.md, accordionItem.class.desktop, accordionItem.class.custom),
-    ...(accordionItem.disabled ? {
-      disabled: true
-    } : {})
-  });
-
-  // const innerBlocksProps = useInnerBlocksProps(blockProps, {
-  // 	directInsert: true,
-  // 	templateInsertUpdatesSelection: true,
-  // 	renderAppender: InnerBlocks.ButtonBlockAppender,
-  // });
-
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "tailwind-blocks-editor-settings"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.Accordion, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.Accordion, {
     iconPosition: "right"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
-    id: "accordion-item"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "accordion-item",
+    className: "border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
     className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
     activeHeaderClassName: "border-b "
-  }, "Accordion Item"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionContent, {
-    className: "py-3 px-3 border-0 border-b pb-3 space-y-2 bg-transparent dark:bg-transparent overflow-auto"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.Tabs, {
+  }, "Accordion Item"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1",
     className: "space-y-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_7__["default"], {
     val: accordionItem.id,
-    update: updateAccordionItemId
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    update: e => updateAttribute("id", e.target.value)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_8__["default"], {
     label: "Open Onload",
     val: accordionItem.open,
-    update: handleOpenChange
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icons_Icons__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    label: "Select Open Icon",
-    val: accordionItem.openIcon,
-    update: handleOpenIconChange
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icons_Icons__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    label: "Select Close Icon",
-    val: accordionItem.closeIcon,
-    update: handleCloseIconChange
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    update: e => updateAttribute("open", e)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_8__["default"], {
     label: "Disabled",
     val: accordionItem.disabled,
-    update: handleDisabledChange
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: "Accordion Item Tag",
+    update: e => updateAttribute("disabled", e)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: "Tag",
     options: tagNameOptions,
     value: accordionItem.tag,
-    update: updateAccordionItemTag
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+    update: e => updateAttribute("tag", e.target.value)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    update: updateTailwindClass,
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    update: e => updateClass("class", e),
     val: accordionItem.class
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
-    id: "accordion-item-header"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "accordion-item-header",
+    className: "border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
     className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
     activeHeaderClassName: "border-b "
-  }, "Accordion Item Header"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionContent, {
-    className: "py-3 px-3 border-0 border-b pb-3 space-y-2 bg-transparent dark:bg-transparent"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.Tabs, {
+  }, "Accordion Item Header"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 space-y-2 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: "Header Tag",
     options: tagNameOptions,
     value: accordionItem.headerTag,
-    update: updateAccordionItemHeaderTag
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+    update: e => updateAttribute("headerTag", e.target.value)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    update: updateTailwindHeaderClass,
-    val: accordionItem.accordionIconClass
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
-    id: "accordion-item-header-title"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    update: e => updateClass("accordionHeaderClass", e),
+    val: accordionItem.accordionHeaderClass
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "accordion-item-header-title",
+    className: "border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
     className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
     activeHeaderClassName: "border-b "
-  }, "Header Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionContent, {
-    className: "py-3 px-3 border-0 border-b pb-3 space-y-2 bg-transparent dark:bg-transparent"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.Tabs, {
+  }, "Header Title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 space-y-2 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    update: updateTailwindHeaderTitleClass,
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    update: e => updateClass("accordionHeaderTitleClass", e),
     val: accordionItem.accordionHeaderTitleClass
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
-    id: "accordion-item-content"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "accordion-item-content",
+    className: "border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
     className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
     activeHeaderClassName: "border-b "
-  }, "Accordion Item Content"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionContent, {
-    className: "py-3 px-3 border-0 border-b pb-3 space-y-2 bg-transparent dark:bg-transparent"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.Tabs, {
+  }, "Accordion Item Content"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 space-y-2 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: "Content Tag",
     options: tagNameOptions,
     value: accordionItem.contentTag,
-    update: updateAccordionItemContentTag
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+    update: e => updateAttribute("contentTag", e.target.value)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    update: updateTailwindContentClass,
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    update: e => updateClass("accordionContentClass", e),
     val: accordionItem.accordionContentClass
-  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionItem, {
-    id: "accordion-item-header-icon"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionHeader, {
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {
+    id: "accordion-item-header-icon",
+    className: "border-primary-200 dark:border-primary-200"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionHeader, {
     className: "bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900",
     activeHeaderClassName: "border-b "
-  }, "Header Icon"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_5__.AccordionContent, {
-    className: "py-3 px-3 border-0 border-b pb-3 space-y-2 bg-transparent dark:bg-transparent"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.Tabs, {
+  }, "Header Icon"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionContent, {
+    className: "py-3 px-3 border-0 pb-3 space-y-2 bg-transparent dark:bg-transparent"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1"
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_6__.TabContent, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icons_Icons__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    label: "Open Icon",
+    val: accordionItem.openIcon,
+    update: e => updateAttribute("openIcon", e)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_icons_Icons__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    label: "Close Icon",
+    val: accordionItem.closeIcon,
+    update: e => updateAttribute("closeIcon", e)
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_13__["default"], {
-    update: updateTailwindIconClass,
-    val: accordionItem.accordionHeaderTitleClass
-  })))))))), JSON.stringify(accordionItem), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    update: e => updateClass("accordionIconClass", e),
+    val: accordionItem.accordionIconClass
+  })))))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(accordionItem.tag, {
     ...blockProps
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomHeaderTag, {
-    onClick: () => {
-      setOpen(!open);
-    },
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_14__.cn)("tailwind-blocks-accordion-header", accordionItem.accordionHeaderClass.sm, accordionItem.accordionHeaderClass.md, accordionItem.accordionHeaderClass.desktop, accordionItem.accordionHeaderClass.custom)
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(accordionItem.headerTag, {
+    onClick: () => setOpen(!open),
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_13__.cn)("tailwind-blocks-accordion-header", accordionItem.accordionHeaderClass?.sm, accordionItem.accordionHeaderClass?.md, accordionItem.accordionHeaderClass?.desktop, accordionItem.accordionHeaderClass?.custom)
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_14__.cn)("tailwind-blocks-accordion-header-title", accordionItem.accordionHeaderTitleClass.sm, accordionItem.accordionHeaderTitleClass.md, accordionItem.accordionHeaderTitleClass.desktop, accordionItem.accordionHeaderTitleClass.custom),
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_13__.cn)("tailwind-blocks-accordion-header-title", accordionItem.accordionHeaderTitleClass?.sm, accordionItem.accordionHeaderTitleClass?.md, accordionItem.accordionHeaderTitleClass?.desktop, accordionItem.accordionHeaderTitleClass?.custom),
     tagName: "span",
     value: accordionItem.headerTitle,
     allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: value => {
-      setAttributes({
-        accordionItem: {
-          ...accordionItem,
-          headerTitle: value
-        }
-      });
-    },
+    onChange: value => updateAttribute("headerTitle", value),
     placeholder: "Start Writing..."
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "tailwind-blocks-accordion-icon size-6"
-  }, open ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, accordionItem.openIcon !== undefined ? renderIcon(accordionItem.openIcon, accordionItem.openIconType) : renderIcon("chevron-down-icon", "solid")) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, accordionItem.closeIcon !== undefined ? renderIcon(accordionItem.closeIcon, accordionItem.closeIconType) : renderIcon("chevron-down-icon", "solid")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomContentTag, {
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_14__.cn)("tailwind-blocks-accordion-content-editor transition-[max-height] duration-300 ease-in-out", accordionItem.accordionContentClass.sm, accordionItem.accordionContentClass.md, accordionItem.accordionContentClass.desktop, accordionItem.accordionContentClass.custom),
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_13__.cn)("tailwind-blocks-accordion-icon", accordionItem.accordionIconClass?.sm, accordionItem.accordionIconClass?.md, accordionItem.accordionIconClass?.desktop, accordionItem.accordionIconClass?.custom)
+  }, open ? renderIcon(accordionItem.openIcon, accordionItem.openIconType) : renderIcon(accordionItem.closeIcon, accordionItem.closeIconType))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(accordionItem.contentTag, {
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_13__.cn)("tailwind-blocks-accordion-content-editor transition-[max-height] duration-300 ease-in-out", accordionItem.accordionContentClass?.sm, accordionItem.accordionContentClass?.md, accordionItem.accordionContentClass?.desktop, accordionItem.accordionContentClass?.custom),
     style: {
       display: open ? "block" : "none",
       maxHeight: open ? "max-content" : "0",
@@ -2021,7 +1922,6 @@ const TailwindInput = ({
     // console.log(val)
     setInputValue(val);
   }, [val]);
-  console.log(val);
   const tailwindClasses = _tailwindClasses__WEBPACK_IMPORTED_MODULE_1__.tailwindCSS;
 
   // Debounce mechanism
@@ -2852,10 +2752,11 @@ const DropdownData = ({
   }, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     onChange: update,
     value: value,
-    className: "!text-[11px] !text-primary-900 hover:!text-primary-900"
+    className: "!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
   }, options.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: index,
-    value: option.value
+    value: option.value,
+    className: ""
   }, option.label))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropdownData);
@@ -2886,7 +2787,7 @@ const InputData = ({
 }) => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Input__WEBPACK_IMPORTED_MODULE_1__.Input, {
     label: label,
-    className: "placeholder:text-primary-200",
+    className: "placeholder:text-primary-200 text-[11px] !border !border-gray-300 !rounded-md",
     wrapperClassName: "w-full inline-flex items-center gap-3 justify-between mb-0",
     labelClassName: "mb-0 text-[11px]",
     icon: false,
@@ -50123,7 +50024,7 @@ const twMerge = /*#__PURE__*/createTailwindMerge(getDefaultConfig);
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"tailwind-blocks/accordion-item","version":"0.1.0","title":"Accordion Item","category":"tailwind-blocks","icon":"welcome-learn-more","parent":["tailwind-blocks/accordion"],"attributes":{"accordionItem":{"type":"object","default":{"tag":"div","headerTag":"div","contentTag":"div","headerTitle":"Accordion Item Header","open":false,"disabled":false,"openIcon":"chevron-down-icon","openIconType":"solid","closeIcon":"","closeIconType":"solid","iconClass":"","class":{"sm":"","md":"","desktop":"","custom":""},"accordionHeaderClass":{"sm":"","md":"","desktop":"","custom":""},"accordionHeaderTitleClass":{"sm":"","md":"","desktop":"","custom":""},"accordionContentClass":{"sm":"","md":"","desktop":"","custom":""},"accordionIconClass":{"sm":"","md":"","desktop":"","custom":"size-6 inline-flex"},"id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./frontend.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"tailwind-blocks/accordion-item","version":"0.1.0","title":"Accordion Item","category":"tailwind-blocks","icon":"welcome-learn-more","parent":["tailwind-blocks/accordion"],"attributes":{"accordionItem":{"type":"object","default":{"tag":"div","headerTag":"div","contentTag":"div","headerTitle":"Accordion Item Header","open":false,"disabled":false,"openIcon":"chevron-down-icon","openIconType":"solid","closeIcon":"chevron-up-icon","closeIconType":"solid","iconClass":"","class":{"sm":"","md":"","desktop":"","custom":""},"accordionHeaderClass":{"sm":"","md":"","desktop":"","custom":"flex items-center justify-between"},"accordionHeaderTitleClass":{"sm":"","md":"","desktop":"","custom":""},"accordionContentClass":{"sm":"","md":"","desktop":"","custom":""},"accordionIconClass":{"sm":"","md":"","desktop":"","custom":"size-6 inline-flex"},"id":""}}},"editorScript":"file:./index.js","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 

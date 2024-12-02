@@ -234,290 +234,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/Dropdown.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/Dropdown.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Dropdown: () => (/* binding */ Dropdown)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _DropdownContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownContext */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js");
-'use client';
-
-
-
-const Dropdown = ({ children, hover = false, hoverDelay = 0, closeDelay = 300, direction = 'bottom' }) => {
-    const [isOpen, setIsOpen] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
-    const timeoutRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    const dropdownRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    const openDropdown = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(() => {
-        if (timeoutRef.current)
-            clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => setIsOpen(true), hoverDelay);
-    }, [hoverDelay]);
-    const closeDropdown = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(() => {
-        if (timeoutRef.current)
-            clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => setIsOpen(false), closeDelay);
-    }, [closeDelay]);
-    const toggleDropdown = (0,react__WEBPACK_IMPORTED_MODULE_1__.useCallback)(() => {
-        setIsOpen(prev => !prev);
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        return () => {
-            if (timeoutRef.current)
-                clearTimeout(timeoutRef.current);
-        };
-    }, []);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-    const getPositionClass = () => {
-        switch (direction) {
-            case 'top':
-                return 'bottom-full mb-2';
-            case 'left':
-                return 'right-full mr-2 top-0';
-            case 'right':
-                return 'left-full top-0 ml-2';
-            case 'bottom-right':
-                return 'top-full left-0 mt-2';
-            case 'bottom-left':
-                return 'top-full right-0 mt-2';
-            case 'top-right':
-                return 'bottom-full left-0 mb-2';
-            case 'top-left':
-                return 'bottom-full right-0 mb-2';
-            default:
-                return 'top-full left-0 mt-2'; // bottom (default)
-        }
-    };
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DropdownContext__WEBPACK_IMPORTED_MODULE_2__.DropdownProvider, { value: {
-            isOpen,
-            toggleDropdown: !hover ? toggleDropdown : () => { },
-            closeDropdown: !hover ? closeDropdown : () => { },
-            direction,
-            positionClass: getPositionClass()
-        }, children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: 'relative inline-block text-left', ...(hover
-                ? { onMouseEnter: openDropdown, onMouseLeave: closeDropdown }
-                : {}), ref: dropdownRef, children: children }) }));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownAction.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownAction.js ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DropdownAction: () => (/* binding */ DropdownAction)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _DropdownContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownContext */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js");
-/* harmony import */ var _utils_cn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/cn */ "./node_modules/aspect-ui/lib/cjs/utils/cn.js");
-/* harmony import */ var _Icon_Arrow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Icon/Arrow */ "./node_modules/aspect-ui/lib/cjs/components/Icon/Arrow.js");
-'use client';
-
-
-
-
-
-const DropdownAction = ({ children, className = "", icon, iconPosition = "end", ...rest }) => {
-    const { toggleDropdown, direction } = (0,_DropdownContext__WEBPACK_IMPORTED_MODULE_2__.useDropdown)();
-    const [iconDefault, setIconDefault] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Icon_Arrow__WEBPACK_IMPORTED_MODULE_4__.Down, {}));
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        if (direction == 'top') {
-            setIconDefault((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Icon_Arrow__WEBPACK_IMPORTED_MODULE_4__.Up, {}));
-        }
-        if (direction == 'left') {
-            setIconDefault((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Icon_Arrow__WEBPACK_IMPORTED_MODULE_4__.Left, {}));
-        }
-        if (direction == 'right') {
-            setIconDefault((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Icon_Arrow__WEBPACK_IMPORTED_MODULE_4__.Right, {}));
-        }
-    }, [direction]);
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", { type: 'button', className: (0,_utils_cn__WEBPACK_IMPORTED_MODULE_3__.cn)('inline-flex w-full justify-center rounded-md bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 px-4 py-2 font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-100', className), onClick: toggleDropdown, ...rest, children: [iconPosition === 'start' && (icon || iconDefault), children, iconPosition === 'end' && (icon ?? iconDefault)] }));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContent.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContent.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DropdownContent: () => (/* binding */ DropdownContent)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _DropdownContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownContext */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js");
-/* harmony import */ var _utils_cn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/cn */ "./node_modules/aspect-ui/lib/cjs/utils/cn.js");
-'use client';
-
-
-
-
-const DropdownContent = ({ children, className = "", ...rest }) => {
-    const { isOpen, positionClass } = (0,_DropdownContext__WEBPACK_IMPORTED_MODULE_2__.useDropdown)();
-    const contentRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-        if (isOpen && contentRef.current) {
-            const selectedItem = contentRef.current.querySelector('[data-selected="true"]');
-            if (selectedItem) {
-                const container = contentRef.current;
-                const containerHeight = container.clientHeight;
-                const itemTop = selectedItem.offsetTop;
-                const itemHeight = selectedItem.offsetHeight;
-                container.scrollTop = itemTop - containerHeight / 2 + itemHeight / 2;
-            }
-        }
-    }, [isOpen]);
-    if (!isOpen)
-        return null;
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: (0,_utils_cn__WEBPACK_IMPORTED_MODULE_3__.cn)("absolute z-10", positionClass, className), ref: contentRef, ...rest, children: children }));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DropdownProvider: () => (/* binding */ DropdownProvider),
-/* harmony export */   useDropdown: () => (/* binding */ useDropdown)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-'use client';
-
-
-const DropdownContext = (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)(undefined);
-const DropdownProvider = ({ children, value }) => {
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(DropdownContext.Provider, { value: value, children: children }));
-};
-const useDropdown = () => {
-    const context = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(DropdownContext);
-    if (context === undefined) {
-        throw new Error('useDropdown must be used within a DropdownProvider');
-    }
-    return context;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownItem.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownItem.js ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DropdownItem: () => (/* binding */ DropdownItem)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _utils_cn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/cn */ "./node_modules/aspect-ui/lib/cjs/utils/cn.js");
-/* harmony import */ var _DropdownContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownContext */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContext.js");
-
-
-
-const DropdownItem = ({ children, className = '', activeClassName = '', onClick, isSelected = false, ...rest }) => {
-    const { closeDropdown } = (0,_DropdownContext__WEBPACK_IMPORTED_MODULE_2__.useDropdown)();
-    const handleClick = () => {
-        if (onClick) {
-            onClick();
-        }
-        closeDropdown();
-    };
-    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", { href: '#', className: (0,_utils_cn__WEBPACK_IMPORTED_MODULE_1__.cn)('block px-4 py-2 text-sm bg-primary-100 dark:bg-primary-900 hover:bg-primary-200 dark:hover:bg-primary-800 text-primary-800 dark:text-primary-200 hover:text-primary-900 dark:hover:text-primary-100 text-nowrap', className, isSelected ? activeClassName : ''), role: 'menuitem', onClick: handleClick, "data-selected": isSelected, ...rest, children: children }));
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownList.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownList.js ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DropdownList: () => (/* binding */ DropdownList)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _utils_cn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/cn */ "./node_modules/aspect-ui/lib/cjs/utils/cn.js");
-'use client';
-
-
-const DropdownList = ({ children, className = "", ...rest }) => {
-    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: (0,_utils_cn__WEBPACK_IMPORTED_MODULE_1__.cn)('py-1 border border-primary-50 dark:border-primary-950 rounded-md shadow-lg bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 ', className), ...rest, children: children });
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/index.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/aspect-ui/lib/cjs/components/Dropdown/index.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Dropdown: () => (/* reexport safe */ _Dropdown__WEBPACK_IMPORTED_MODULE_0__.Dropdown),
-/* harmony export */   DropdownAction: () => (/* reexport safe */ _DropdownAction__WEBPACK_IMPORTED_MODULE_1__.DropdownAction),
-/* harmony export */   DropdownContent: () => (/* reexport safe */ _DropdownContent__WEBPACK_IMPORTED_MODULE_2__.DropdownContent),
-/* harmony export */   DropdownItem: () => (/* reexport safe */ _DropdownItem__WEBPACK_IMPORTED_MODULE_3__.DropdownItem),
-/* harmony export */   DropdownList: () => (/* reexport safe */ _DropdownList__WEBPACK_IMPORTED_MODULE_4__.DropdownList)
-/* harmony export */ });
-/* harmony import */ var _Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dropdown */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/Dropdown.js");
-/* harmony import */ var _DropdownAction__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownAction */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownAction.js");
-/* harmony import */ var _DropdownContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownContent */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownContent.js");
-/* harmony import */ var _DropdownItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownItem */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownItem.js");
-/* harmony import */ var _DropdownList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownList */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/DropdownList.js");
-
-
-
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/aspect-ui/lib/cjs/components/Icon/Arrow.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/aspect-ui/lib/cjs/components/Icon/Arrow.js ***!
@@ -1190,24 +906,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/accordion/block.json");
-/* harmony import */ var aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aspect-ui/Dropdown */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/index.js");
-/* harmony import */ var aspect_ui_Input__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! aspect-ui/Input */ "./node_modules/aspect-ui/lib/cjs/components/Input/index.js");
-/* harmony import */ var aspect_ui_Switch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! aspect-ui/Switch */ "./node_modules/aspect-ui/lib/cjs/components/Switch/index.js");
-/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
+/* harmony import */ var aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! aspect-ui/Tabs */ "./node_modules/aspect-ui/lib/cjs/components/Tabs/index.js");
+/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
+/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
+/* harmony import */ var _components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/block-components/switch-data */ "./src/components/block-components/switch-data.jsx");
 /* harmony import */ var _components_Style__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/Style */ "./src/components/Style.jsx");
 /* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
-/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
-/* harmony import */ var _components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/block-components/switch-data */ "./src/components/block-components/switch-data.jsx");
-/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
 
 
 
 
 
 // import TailwindInput from "../../components/TailwindInput";
-
-
-
 
 
 
@@ -1294,35 +1004,34 @@ function EditComponent(props) {
     allowedBlocks: ALLOWED_BLOCKS,
     directInsert: true,
     template: MY_TEMPLATE,
-    // templateInsertUpdatesSelection: true,
     renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.ButtonBlockAppender
   });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "tailwind-blocks-editor-settings"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.Tabs, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.Tabs, {
     defaultActive: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.TabList, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabList, {
     className: "px-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.TabItem, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-1"
-  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.TabItem, {
+  }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabItem, {
     value: "item-2"
-  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.TabContent, {
+  }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-1",
     className: "space-y-3 py-3 px-3"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_7__["default"], {
     val: accordion.id,
     update: updateAccordionId
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_switch_data__WEBPACK_IMPORTED_MODULE_8__["default"], {
     label: "Open Multiple",
     val: accordion.multiple,
     update: handleMultipleChange
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: "Accordion Tag",
     options: tagNameOptions,
     value: accordion.tag,
     update: updateAccordionTag
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_8__.TabContent, {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_5__.TabContent, {
     value: "item-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_9__["default"], {
     update: updateTailwindClass,
@@ -2077,7 +1786,6 @@ const TailwindInput = ({
     // console.log(val)
     setInputValue(val);
   }, [val]);
-  console.log(val);
   const tailwindClasses = _tailwindClasses__WEBPACK_IMPORTED_MODULE_1__.tailwindCSS;
 
   // Debounce mechanism
@@ -2908,10 +2616,11 @@ const DropdownData = ({
   }, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
     onChange: update,
     value: value,
-    className: "!text-[11px] !text-primary-900 hover:!text-primary-900"
+    className: "!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
   }, options.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
     key: index,
-    value: option.value
+    value: option.value,
+    className: ""
   }, option.label))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropdownData);
@@ -2942,7 +2651,7 @@ const InputData = ({
 }) => {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Input__WEBPACK_IMPORTED_MODULE_1__.Input, {
     label: label,
-    className: "placeholder:text-primary-200",
+    className: "placeholder:text-primary-200 text-[11px] !border !border-gray-300 !rounded-md",
     wrapperClassName: "w-full inline-flex items-center gap-3 justify-between mb-0",
     labelClassName: "mb-0 text-[11px]",
     icon: false,

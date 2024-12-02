@@ -1146,100 +1146,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var aspect_ui_Input__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! aspect-ui/Input */ "./node_modules/aspect-ui/lib/cjs/components/Input/index.js");
 /* harmony import */ var aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! aspect-ui/Dropdown */ "./node_modules/aspect-ui/lib/cjs/components/Dropdown/index.js");
 /* harmony import */ var _components_utils_cn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/utils/cn */ "./src/components/utils/cn.js");
+/* harmony import */ var _components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../components/block-components/dropdown-data */ "./src/components/block-components/dropdown-data.jsx");
+/* harmony import */ var _components_block_components_input_data__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../components/block-components/input-data */ "./src/components/block-components/input-data.jsx");
 
 
 
 
 
 
-// import TailwindInput from "../../components/TailwindInput";
 
 
 
 
 
+
+
+
+// Constants
+const tagNameOptions = [{
+  label: "H1",
+  value: "h1"
+}, {
+  label: "H2",
+  value: "h2"
+}, {
+  label: "H3",
+  value: "h3"
+}, {
+  label: "H4",
+  value: "h4"
+}, {
+  label: "H5",
+  value: "h5"
+}, {
+  label: "H6",
+  value: "h6"
+}, {
+  label: "SPAN",
+  value: "span"
+}, {
+  label: "DIV",
+  value: "div"
+}, {
+  label: "P",
+  value: "p"
+}];
+
+// Block Registration
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   edit: EditComponent,
   save: SaveComponent
 });
-function EditComponent(props) {
-  var attributes = props.attributes;
-  var setAttributes = props.setAttributes;
-  var container = attributes.container;
-  const [containerClass, setContainerClass] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(container.class);
-  const CustomTag = container.tag;
-  const tagNameOptions = [
-  // { label: "a", value: "a" },
-  {
-    label: "H1",
-    value: "h1"
-  }, {
-    label: "H2",
-    value: "h2"
-  }, {
-    label: "H3",
-    value: "h3"
-  }, {
-    label: "H4",
-    value: "h4"
-  }, {
-    label: "H5",
-    value: "h5"
-  }, {
-    label: "H6",
-    value: "h6"
-  }, {
-    label: "SPAN",
-    value: "span"
-  }, {
-    label: "DIV",
-    value: "div"
-  }, {
-    label: "P",
-    value: "p"
-  }];
+function EditComponent({
+  attributes,
+  setAttributes
+}) {
+  const {
+    container
+  } = attributes;
+  const {
+    id,
+    tag,
+    class: containerClass
+  } = container;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
-    setContainerClass(container.class);
-  }, [container.class]);
-  function updateSkyColor(e) {
-    props.setAttributes({
-      skyColor: e.target.value
-    });
-  }
-  // function updateClass(e) {
-  // 	props.setAttributes({ class: e.target.value });
-  // }
-  function updateTailwindClass(e) {
+    // Ensure state stays in sync
+    if (!containerClass) {
+      setAttributes({
+        container: {
+          ...container,
+          class: {
+            sm: "",
+            md: "",
+            desktop: "",
+            custom: ""
+          }
+        }
+      });
+    }
+  }, [containerClass, setAttributes]);
+  const CustomTag = container.tag || "div";
+
+  // Handlers
+  const updateTailwindClass = classes => {
     setAttributes({
       container: {
         ...container,
-        class: e
+        class: classes
       }
     });
-  }
-  function updateContainerId(e) {
+  };
+  const updateContainerId = e => {
     setAttributes({
       container: {
         ...container,
         id: e.target.value
       }
     });
-  }
-  function updateGrassColor(e) {
-    props.setAttributes({
-      grassColor: e.target.value
+  };
+  const updateContainerTag = e => {
+    setAttributes({
+      container: {
+        ...container,
+        tag: e.target.value
+      }
     });
-  }
+  };
+
+  // Props
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_10__.cn)("tailwind-blocks", container.class.sm, container.class.md, container.class.desktop, container.class.custom)
+    className: (0,_components_utils_cn__WEBPACK_IMPORTED_MODULE_10__.cn)("tailwind-blocks", containerClass?.sm, containerClass?.md, containerClass?.desktop, containerClass?.custom)
   });
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
     directInsert: true,
     templateInsertUpdatesSelection: true,
     renderAppender: _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.ButtonBlockAppender
   });
+
+  // Render
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "bg-primary-200"
+    className: " p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.Tabs, {
     defaultActive: "item-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabList, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabItem, {
@@ -1247,38 +1273,21 @@ function EditComponent(props) {
   }, "Options"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabItem, {
     value: "item-2"
   }, "Style")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabContent, {
-    value: "item-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Input__WEBPACK_IMPORTED_MODULE_8__.Input, {
-    label: "ID"
-    // className="mr-3 p-2 rounded-lg"
-    ,
-    type: "text",
-    value: container.id,
-    onChange: updateContainerId,
-    placeholder: "sky color..."
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.Dropdown, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownAction, null, container.tag.length > 0 ? tagNameOptions.find(option => option.value === container.tag)?.label : "Select Tag Name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownContent, null, tagNameOptions.map((option, index) => {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Dropdown__WEBPACK_IMPORTED_MODULE_9__.DropdownList, {
-      key: index,
-      onClick: () => {
-        setAttributes({
-          container: {
-            ...container,
-            tag: option.value
-          }
-        });
-      }
-    }, option.label);
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: "mr-3 p-2 rounded-lg",
-    type: "container",
-    value: attributes.grassColor,
-    onChange: updateGrassColor,
-    placeholder: "grass color..."
+    value: "item-1",
+    className: "space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_input_data__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    val: id || "",
+    update: updateContainerId
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_block_components_dropdown_data__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    label: "Tag",
+    options: tagNameOptions,
+    value: container.tag,
+    update: updateContainerTag
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tabs__WEBPACK_IMPORTED_MODULE_7__.TabContent, {
     value: "item-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Style__WEBPACK_IMPORTED_MODULE_6__["default"], {
     update: updateTailwindClass,
-    val: container.class
+    val: containerClass
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(CustomTag, {
     ...innerBlocksProps
   }, innerBlocksProps.children));
@@ -2029,7 +2038,6 @@ const TailwindInput = ({
     // console.log(val)
     setInputValue(val);
   }, [val]);
-  console.log(val);
   const tailwindClasses = _tailwindClasses__WEBPACK_IMPORTED_MODULE_1__.tailwindCSS;
 
   // Debounce mechanism
@@ -2822,6 +2830,90 @@ const WordBreak = ({
   }, "Keep"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WordBreak);
+
+/***/ }),
+
+/***/ "./src/components/block-components/dropdown-data.jsx":
+/*!***********************************************************!*\
+  !*** ./src/components/block-components/dropdown-data.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+// import {
+// 	Dropdown,
+// 	DropdownAction,
+// 	DropdownContent,
+// 	DropdownList,
+// } from "aspect-ui/Dropdown";
+
+const DropdownData = ({
+  label,
+  options,
+  value,
+  update
+}) => {
+  const selectedLabel = value.length > 0 ? options.find(option => option.value === value)?.label : "Select Tag Name";
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "w-full inline-flex gap-3 items-center justify-between"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "text-primary-900 font-medium text-[11px]"
+  }, label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: update,
+    value: value,
+    className: "!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
+  }, options.map((option, index) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+    key: index,
+    value: option.value,
+    className: ""
+  }, option.label))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropdownData);
+
+/***/ }),
+
+/***/ "./src/components/block-components/input-data.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/block-components/input-data.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aspect_ui_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aspect-ui/Input */ "./node_modules/aspect-ui/lib/cjs/components/Input/index.js");
+
+
+
+const InputData = ({
+  val,
+  update,
+  label = "ID",
+  placeholder = "id"
+}) => {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Input__WEBPACK_IMPORTED_MODULE_1__.Input, {
+    label: label,
+    className: "placeholder:text-primary-200 text-[11px] !border !border-gray-300 !rounded-md",
+    wrapperClassName: "w-full inline-flex items-center gap-3 justify-between mb-0",
+    labelClassName: "mb-0 text-[11px]",
+    icon: false,
+    type: "text",
+    value: val,
+    onChange: update,
+    placeholder: placeholder
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (InputData);
 
 /***/ }),
 

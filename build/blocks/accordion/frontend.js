@@ -28169,58 +28169,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
-/* harmony import */ var _components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/icons/IconListSolid */ "./src/components/icons/IconListSolid.jsx");
-/* harmony import */ var _components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/icons/IconListOutline */ "./src/components/icons/IconListOutline.jsx");
+/* harmony import */ var _components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/icons/IconListOutline */ "./src/components/icons/IconListOutline.jsx");
+/* harmony import */ var _components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/icons/IconListSolid */ "./src/components/icons/IconListSolid.jsx");
 
 
 
 
 
-
-// Creating the maps for solid and outline icons
-const solidIconsMap = Object.fromEntries(_components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_2__["default"].map(item => [item.name, item.icon]));
-const outlineIconsMap = Object.fromEntries(_components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_3__["default"].map(item => [item.name, item.icon]));
 document.addEventListener("DOMContentLoaded", () => {
-  // Select all the accordion containers
   const accordionContainers = document.querySelectorAll(".tailwind-blocks-accordion");
-  accordionContainers.forEach(accordionContainer => {
-    // Get the "data-multiple" attribute value (whether multiple items can be open at once)
-    const allowMultiple = accordionContainer.dataset.multiple === "true";
 
-    // Select all accordion items inside the container
+  // Map to store React roots for icon elements
+  const iconRoots = new Map();
+  const solidIconsMap = Object.fromEntries(_components_icons_IconListSolid__WEBPACK_IMPORTED_MODULE_3__["default"].map(item => [item.name, item.icon]));
+  const outlineIconsMap = Object.fromEntries(_components_icons_IconListOutline__WEBPACK_IMPORTED_MODULE_2__["default"].map(item => [item.name, item.icon]));
+  accordionContainers.forEach(accordionContainer => {
+    const allowMultiple = accordionContainer.dataset.multiple === "true" || accordionContainer.dataset.multiple === "1";
     const accordionItems = accordionContainer.querySelectorAll(".tailwind-blocks-accordion-item");
-    accordionItems.forEach((accordionItem, index) => {
+    accordionItems.forEach(accordionItem => {
       const header = accordionItem.querySelector(".tailwind-blocks-accordion-header");
       const content = accordionItem.querySelector(".tailwind-blocks-accordion-content");
       const icon = accordionItem.querySelector(".tailwind-blocks-accordion-icon");
-
-      // Get the default open state for the individual item
       const defaultOpen = accordionItem.dataset.open === "true" || accordionItem.dataset.open === "1";
-      console.log("defaultOpen", defaultOpen);
-      const openIcon = icon.dataset.openIcon; // "arrow-down-tray-icon"
-      const closeIcon = icon.dataset.closeIcon; // "arrow-left-start-on-rectangle-icon"
-      const openIconType = icon.dataset.openIconType; // "solid"
-      const closeIconType = icon.dataset.closeIconType; // "solid"
-
-      // Set the initial icon (open icon by default) by rendering React component
+      const openIcon = icon.dataset.openIcon;
+      const closeIcon = icon.dataset.closeIcon;
+      const openIconType = icon.dataset.openIconType;
+      const closeIconType = icon.dataset.closeIconType;
       renderIcon(icon, openIcon, openIconType);
-
-      // If defaultOpen is true, open the first accordion item
       if (defaultOpen) {
         accordionItem.classList.add("open");
-        content.style.height = content.scrollHeight + "px"; // Set the content height when open
-        renderIcon(icon, closeIcon, closeIconType); // Set the icon to the close icon when open
+        content.style.height = content.scrollHeight + "px";
+        renderIcon(icon, closeIcon, closeIconType);
       }
-
-      // Handle click event on accordion header
       header.addEventListener("click", () => {
+        if (accordionItem.dataset.disabled === "true" || accordionItem.dataset.disabled === "1") {
+          return; // Skip disabled items
+        }
         const isOpen = accordionItem.classList.contains("open");
-
-        // If multiple items are allowed to be open, just toggle this one
         if (allowMultiple) {
           toggleAccordionItem(accordionItem, isOpen, content, icon, openIcon, closeIcon, openIconType, closeIconType);
         } else {
-          // If only one item can be open at a time, close all items and open the clicked one
           accordionItems.forEach(item => {
             const itemContent = item.querySelector(".tailwind-blocks-accordion-content");
             const itemIcon = item.querySelector(".tailwind-blocks-accordion-icon");
@@ -28228,9 +28216,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (item !== accordionItem) {
               item.classList.remove("open");
               itemContent.style.height = 0;
-              renderIcon(itemIcon, itemIcon.dataset.openIcon, itemIcon.dataset.openIconType); // Reset the icon to the open icon for closed items
+              renderIcon(itemIcon, itemIcon.dataset.openIcon, itemIcon.dataset.openIconType);
             }
-            // Open the clicked item
             if (!itemIsOpen) {
               toggleAccordionItem(accordionItem, false, content, icon, openIcon, closeIcon, openIconType, closeIconType);
             }
@@ -28239,33 +28226,32 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-
-  // Function to render the icon using ReactDOM
   function renderIcon(iconElement, iconName, iconType) {
     const iconMap = iconType === "solid" ? solidIconsMap : outlineIconsMap;
     const IconComponent = iconMap[iconName];
-
-    // Only render if we have the icon component
     if (IconComponent) {
-      const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(iconElement);
+      // Check if root already exists
+      let root = iconRoots.get(iconElement);
+      if (!root) {
+        // Create root if it doesn't exist
+        root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(iconElement);
+        iconRoots.set(iconElement, root);
+      }
+
+      // Render the icon component
       root.render((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(IconComponent, null));
     }
   }
-
-  // Function to toggle the accordion item
   function toggleAccordionItem(accordionItem, isOpen, content, icon, openIcon, closeIcon, openIconType, closeIconType) {
     const iconMap = openIconType === "solid" ? solidIconsMap : outlineIconsMap;
-    const OpenIcon = iconMap[openIcon] || openIcon; // Get the open icon React component or fallback
-    const CloseIcon = iconMap[closeIcon] || closeIcon; // Get the close icon React component or fallback
-
     if (isOpen) {
       accordionItem.classList.remove("open");
       content.style.height = 0;
-      renderIcon(icon, openIcon, openIconType); // Render open icon when closing
+      renderIcon(icon, openIcon, openIconType);
     } else {
       accordionItem.classList.add("open");
       content.style.height = content.scrollHeight + "px";
-      renderIcon(icon, closeIcon, closeIconType); // Render close icon when opening
+      renderIcon(icon, closeIcon, closeIconType);
     }
   }
 });
