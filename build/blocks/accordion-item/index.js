@@ -1007,7 +1007,7 @@ function EditComponent(props) {
     value: "p"
   }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "tailwind-blocks-editor-settings"
+    className: "tailwind-blocks-editor-settings mb-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.Accordion, {
     iconPosition: "right"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Accordion__WEBPACK_IMPORTED_MODULE_4__.AccordionItem, {

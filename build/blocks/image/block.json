@@ -1,0 +1,75 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "tailwind-blocks/image",
+  "version": "0.1.0",
+  "title": "Image",
+  "category": "tailwind-blocks",
+  "icon": "welcome-learn-more",
+  "usesContext": [
+    "postId",
+    "loopIndex",
+    "postType",
+    "queryId"
+  ],
+  "example": {
+    "attributes": {
+      "title": {
+        "tag": "p",
+        "limitBy": "",
+        "limitCount": 99,
+        "linkTo": "postUrl",
+        "linkTarget": "_blank",
+        "linkAttr": [],
+        "metaKey": "",
+        "customUrl": "",
+        "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": "text-primary-900 font-medium text-[30px] text-center bg-primary-200 border-l-4 border-l-primary-900"
+        },
+        "linkClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "content": "The quick brown fox jumps over the lazy dog",
+        "id": ""
+      }
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "object",
+      "default": {
+        "tag": "p",
+        "limitBy": "",
+        "limitCount": 99,
+        "linkTo": "postUrl",
+        "linkTarget": "_self",
+        "linkAttr": [],
+        "metaKey": "",
+        "customUrl": "",
+        "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "linkClass": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": ""
+        },
+        "content": "The quick brown fox jumps over the lazy dog",
+        "id": ""
+      }
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

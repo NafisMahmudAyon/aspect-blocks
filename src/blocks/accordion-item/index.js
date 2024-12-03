@@ -79,7 +79,7 @@ function EditComponent(props) {
 	return (
 		<>
 			<InspectorControls>
-				<div className="tailwind-blocks-editor-settings">
+				<div className="tailwind-blocks-editor-settings mb-3">
 					<Accordion iconPosition="right">
 						{/* Accordion Item Settings */}
 						<AccordionItem id="accordion-item" className="border-primary-200 dark:border-primary-200">
