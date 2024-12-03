@@ -41,24 +41,30 @@
     }
   },
   "attributes": {
-    "title": {
+    "image": {
       "type": "object",
       "default": {
         "tag": "p",
-        "limitBy": "",
-        "limitCount": 99,
-        "linkTo": "postUrl",
-        "linkTarget": "_self",
-        "linkAttr": [],
+        "imgSrc": "media",
+        "imgSrcID": "",
+        "imgSrcUrl": "",
         "metaKey": "",
-        "customUrl": "",
+        "lightbox": false,
+        "lazyLoad": false,
+        "linkAttr": [],
         "class": {
+          "sm": "",
+          "md": "",
+          "desktop": "",
+          "custom": "text-primary-900 font-medium text-[30px] text-center bg-primary-200 border-l-4 border-l-primary-900"
+        },
+        "wrapperClass": {
           "sm": "",
           "md": "",
           "desktop": "",
           "custom": ""
         },
-        "linkClass": {
+        "captionClass": {
           "sm": "",
           "md": "",
           "desktop": "",

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tailwindbuild": "tailwindcss -i ./src/style.css -o ./dist/style.css --postcss --minify",
-    "tailwindwatch": "tailwindcss -i ./src/style.css -o ./build/style.css --watch --postcss --minify",
-    "watch": "tailwindcss -i ./src/style.css -o ./dist/style.css --watch --postcss --minify",
+    "tailwindwatch": "tailwindcss -i ./src/style.css -o ./assets/css/style.css --watch --postcss --minify",
+    "watch": "tailwindcss -i ./src/style.css -o ./assets/css/style.css --watch --postcss --minify",
     "preview": "npm-run-all --parallel sync start",
     "sync": "browser-sync start -p 'wp' --files '**/*.php' 'build/*.js' 'build/*.css'",
     "bsync": "browser-sync start --proxy localhost/wp --files *",
@@ -35,16 +35,18 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@tailwindcss/cli": "^4.0.0-beta.4",
+    "@tailwindcss/postcss": "^4.0.0-beta.4",
     "@wordpress/element": "^6.11.0",
     "aspect-ui": "^0.0.49",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
-    "postcss": "^8.4.38",
+    "postcss": "^8.4.49",
     "postcss-nested": "^6.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-select": "^5.8.3",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^4.0.0-beta.4"
   }
 }

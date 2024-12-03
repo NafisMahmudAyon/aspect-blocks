@@ -15,7 +15,7 @@ divsToUpdate.forEach(div => {
 function OurComponent(props) {
   const [blockClass, setBlockClass] = useState(
 		props.class ||
-			"bg-amber-100 border-2 border-amber-300 p-4 my-3 rounded shadow-md",
+			"bg-amber-100 border-2 border-amber-300 p-4 my-3 rounded-sm shadow-md",
 	);
   const [showSkyColor, setShowSkyColor] = useState(false)
   const [showGrassColor, setShowGrassColor] = useState(false)

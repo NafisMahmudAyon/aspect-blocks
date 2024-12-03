@@ -1,25 +1,17 @@
-import "../../style.css";
 import {
-	InspectorControls,
 	InnerBlocks,
+	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
-import metadata from "./block.json";
 import { useEffect } from "@wordpress/element";
-import Style from "../../components/Style";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
-import { Input } from "aspect-ui/Input";
-import {
-	Dropdown,
-	DropdownAction,
-	DropdownContent,
-	DropdownList,
-} from "aspect-ui/Dropdown";
-import { cn } from "../../components/utils/cn";
 import DropdownData from "../../components/block-components/dropdown-data";
 import InputData from "../../components/block-components/input-data";
+import Style from "../../components/Style";
+import { cn } from "../../components/utils/cn";
+import metadata from "./block.json";
 
 // Constants
 const tagNameOptions = [

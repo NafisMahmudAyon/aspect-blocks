@@ -1,5 +1,3 @@
-import "../../style.css";
-
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -82,7 +80,10 @@ function EditComponent(props) {
 				<div className="tailwind-blocks-editor-settings mb-3">
 					<Accordion iconPosition="right">
 						{/* Accordion Item Settings */}
-						<AccordionItem id="accordion-item" className="border-primary-200 dark:border-primary-200">
+						<AccordionItem
+							id="accordion-item"
+							className="border-primary-200 dark:border-primary-200"
+						>
 							<AccordionHeader
 								className="bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900"
 								activeHeaderClassName="border-b "
@@ -126,7 +127,10 @@ function EditComponent(props) {
 								</Tabs>
 							</AccordionContent>
 						</AccordionItem>
-						<AccordionItem id="accordion-item-header" className="border-primary-200 dark:border-primary-200">
+						<AccordionItem
+							id="accordion-item-header"
+							className="border-primary-200 dark:border-primary-200"
+						>
 							<AccordionHeader
 								className="bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900"
 								activeHeaderClassName="border-b "
@@ -158,7 +162,10 @@ function EditComponent(props) {
 								</Tabs>
 							</AccordionContent>
 						</AccordionItem>
-						<AccordionItem id="accordion-item-header-title" className="border-primary-200 dark:border-primary-200">
+						<AccordionItem
+							id="accordion-item-header-title"
+							className="border-primary-200 dark:border-primary-200"
+						>
 							<AccordionHeader
 								className="bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900"
 								activeHeaderClassName="border-b "
@@ -183,7 +190,10 @@ function EditComponent(props) {
 								</Tabs>
 							</AccordionContent>
 						</AccordionItem>
-						<AccordionItem id="accordion-item-content" className="border-primary-200 dark:border-primary-200">
+						<AccordionItem
+							id="accordion-item-content"
+							className="border-primary-200 dark:border-primary-200"
+						>
 							<AccordionHeader
 								className="bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900"
 								activeHeaderClassName="border-b "
@@ -215,7 +225,10 @@ function EditComponent(props) {
 								</Tabs>
 							</AccordionContent>
 						</AccordionItem>
-						<AccordionItem id="accordion-item-header-icon" className="border-primary-200 dark:border-primary-200">
+						<AccordionItem
+							id="accordion-item-header-icon"
+							className="border-primary-200 dark:border-primary-200"
+						>
 							<AccordionHeader
 								className="bg-transparent hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent pl-2 py-2 font-medium text-primary-900 dark:text-primary-900"
 								activeHeaderClassName="border-b "

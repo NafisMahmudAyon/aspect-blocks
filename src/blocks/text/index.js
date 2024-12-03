@@ -1,5 +1,3 @@
-import "../../style.css";
-
 import {
 	InspectorControls,
 	RichText,
@@ -9,9 +7,9 @@ import { registerBlockType } from "@wordpress/blocks";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
 import DropdownData from "../../components/block-components/dropdown-data";
 import InputData from "../../components/block-components/input-data";
+import Style from "../../components/Style";
 import { cn } from "../../components/utils/cn";
 import metadata from "./block.json";
-import Style from "../../components/Style";
 
 const tagNameOptions = [
 	{ label: "H1", value: "h1" },
@@ -46,7 +44,6 @@ function EditComponent({ attributes, setAttributes }) {
 			text.class?.custom,
 		),
 	});
-
 
 	return (
 		<>

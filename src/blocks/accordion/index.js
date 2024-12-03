@@ -1,5 +1,3 @@
-import "../../style.css";
-
 import {
 	InnerBlocks,
 	InspectorControls,

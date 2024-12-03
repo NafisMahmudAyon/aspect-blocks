@@ -77,6 +77,7 @@ function register_tailwind_blocks()
   register_block_type(__DIR__ . '/build/blocks/accordion');
   register_block_type(__DIR__ . '/build/blocks/accordion-item');
   register_block_type(__DIR__ . '/build/blocks/post-title');
+  register_block_type(__DIR__ . '/build/blocks/image');
 }
 
 add_action('init', 'register_tailwind_blocks');

@@ -1,8 +1,11 @@
-import "../../style.css";
-
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
-import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from "aspect-ui/Accordion";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionHeader,
+	AccordionItem,
+} from "aspect-ui/Accordion";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
 import DropdownData from "../../components/block-components/dropdown-data";
 import LinkPicker from "../../components/block-components/link-picker";

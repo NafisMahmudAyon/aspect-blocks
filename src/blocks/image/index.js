@@ -1,11 +1,12 @@
-import "../../style.css";
-
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
-import { Accordion, AccordionContent, AccordionHeader, AccordionItem } from "aspect-ui/Accordion";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionHeader,
+	AccordionItem,
+} from "aspect-ui/Accordion";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
-import DropdownData from "../../components/block-components/dropdown-data";
-import LinkPicker from "../../components/block-components/link-picker";
 import Style from "../../components/Style";
 import { cn } from "../../components/utils/cn";
 import metadata from "./block.json";
@@ -26,29 +27,29 @@ const tagNameOptions = [
 registerBlockType(metadata.name, { edit: EditComponent });
 
 function EditComponent({ attributes, setAttributes }) {
-	const { title } = attributes;
-	const CustomTag = title.tag || "div";
+	const { image } = attributes;
+	console.log(image)
+	// const CustomTag = image.tag || "div";
 
 	// Helper to update text attributes
-	const updateTitleAttribute = (key, value) => {
-		setAttributes({ title: { ...title, [key]: value } });
+	const updateImageAttribute = (key, value) => {
+		setAttributes({ image: { ...image, [key]: value } });
 	};
 
 	// Block properties with dynamic classes
 	const blockProps = useBlockProps({
 		className: cn(
 			"tailwind-blocks tailwind-blocks-text",
-			title.class?.sm,
-			title.class?.md,
-			title.class?.desktop,
-			title.class?.custom,
+			image.class?.sm,
+			image.class?.md,
+			image.class?.desktop,
+			image.class?.custom,
 		),
 	});
 
-	const linkToOptions = [
+	const imageSrc = [
 		{ label: "Choose", value: "" },
-		{ label: "Post URL", value: "postUrl" },
-		{ label: "Home URL", value: "homeUrl" },
+		{ label: "Media", value: "media" },
 		{ label: "Custom Field", value: "customField" },
 		{ label: "Custom URL", value: "customUrl" },
 	];
@@ -80,8 +81,8 @@ function EditComponent({ attributes, setAttributes }) {
 									></TabContent>
 									<TabContent value="item-2">
 										<Style
-											update={(e) => updateTitleAttribute("wrapperClass", e)}
-											val={title.class}
+											update={(e) => updateImageAttribute("wrapperClass", e)}
+											val={image.wrapperClass}
 										/>
 									</TabContent>
 								</Tabs>
@@ -104,31 +105,46 @@ function EditComponent({ attributes, setAttributes }) {
 										<TabItem value="item-2">Style</TabItem>
 									</TabList>
 									<TabContent value="item-1" className="space-y-3 py-3 px-3">
-										
-										<LinkPicker
-											customUrlValue={title.customUrl}
+										<div className="flex items-center justify-between">
+											<label htmlFor="link-to">Image Src</label>
+											<select
+												onChange={(e) =>
+													updateImageAttribute("imgSrc", e.target.value)
+												}
+												value={image.imgSrc}
+												className="!text-[11px] !text-primary-900 hover:!text-primary-900 !border !border-gray-300"
+											>
+												{imageSrc.map((option, index) => (
+													<option key={index} value={option.value} className="">
+														{option.label}
+													</option>
+												))}
+											</select>
+										</div>
+										{/* <LinkPicker
+											customUrlValue={image.customUrl}
 											linkPickerOptions={linkToOptions}
-											linkTargetValue={title.linkTarget}
-											linkToValue={title.linkTo}
-											customMetaKey={title.metaKey}
+											linkTargetValue={image.linkTarget}
+											linkToValue={image.linkTo}
+											customMetaKey={image.metaKey}
 											updateLinkTo={(e) =>
-												updateTitleAttribute("linkTo", e.target.value)
+												updateImageAttribute("linkTo", e.target.value)
 											}
 											updateLinkTarget={(e) =>
-												updateTitleAttribute("linkTarget", e.target.value)
+												updateImageAttribute("linkTarget", e.target.value)
 											}
 											updateCustomUrl={(e) =>
-												updateTitleAttribute("customUrl", e.target.value)
+												updateImageAttribute("customUrl", e.target.value)
 											}
 											updateCustomMetaKey={(e) =>
-												updateTitleAttribute("metaKey", e.target.value)
+												updateImageAttribute("metaKey", e.target.value)
 											}
-										/>
+										/> */}
 									</TabContent>
 									<TabContent value="item-2">
 										<Style
-											update={(e) => updateTitleAttribute("linkClass", e)}
-											val={title.linkClass}
+											update={(e) => updateImageAttribute("class", e)}
+											val={image.class}
 										/>
 									</TabContent>
 								</Tabs>
@@ -138,22 +154,9 @@ function EditComponent({ attributes, setAttributes }) {
 				</div>
 			</InspectorControls>
 			{/* {JSON.stringify(title)} */}
-			<CustomTag {...blockProps}>
-				{title.linkTo.length > 0 && (
-					<a
-						href="#"
-						className={cn(
-							title.linkClass?.sm,
-							title.linkClass?.md,
-							title.linkClass?.desktop,
-							title.linkClass?.custom,
-						)}
-					>
-						{title.content}
-					</a>
-				)}
-				{title.linkTo.length == 0 && title.content}
-			</CustomTag>
+			<figure {...blockProps}>
+				{image.content}
+			</figure>
 		</>
 	);
 }
