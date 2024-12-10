@@ -1,3 +1,5 @@
+import "../../style.css";
+
 import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { registerBlockType } from "@wordpress/blocks";
 import {
@@ -40,7 +42,7 @@ function EditComponent({ attributes, setAttributes }) {
 	// Block properties with dynamic classes
 	const blockProps = useBlockProps({
 		className: cn(
-			"tailwind-blocks tailwind-blocks-text",
+			"aspect-blocks aspect-blocks-text",
 			title.class?.sm,
 			title.class?.md,
 			title.class?.desktop,
@@ -59,7 +61,7 @@ function EditComponent({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<div className="tailwind-blocks-editor-settings mb-3">
+				<div className="aspect-blocks-editor-settings mb-3">
 					<Accordion iconPosition="right">
 						<AccordionItem
 							id="post-title"

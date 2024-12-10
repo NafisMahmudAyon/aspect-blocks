@@ -1,11 +1,15 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "tailwind-blocks/image",
+  "name": "aspect-blocks/image",
   "version": "0.1.0",
   "title": "Image",
-  "category": "tailwind-blocks",
+  "category": "aspect-blocks",
   "icon": "welcome-learn-more",
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
   "example": {
     "attributes": {
       "image": {
@@ -16,6 +20,8 @@
         "metaKey": "",
         "lightbox": false,
         "lazyLoad": false,
+        "captionEnable": false,
+        "captionSrc": "custom",
         "linkAttr": [],
         "class": {
           "sm": "",
@@ -35,7 +41,8 @@
           "desktop": "",
           "custom": ""
         },
-        "content": "The quick brown fox jumps over the lazy dog",
+        "customCaption": "The quick brown fox jumps over the lazy dog",
+        "captionMetaKey": "",
         "id": ""
       }
     }
@@ -48,9 +55,12 @@
         "imgSrc": "media",
         "imgSrcID": "",
         "imgSrcUrl": "",
+        "customImgSrcUrl": "",
         "metaKey": "",
         "lightbox": false,
         "lazyLoad": false,
+        "captionEnable": false,
+        "captionSrc": "customText",
         "linkAttr": [],
         "class": {
           "sm": "",
@@ -70,7 +80,8 @@
           "desktop": "",
           "custom": ""
         },
-        "content": "The quick brown fox jumps over the lazy dog",
+        "customCaption": "The quick brown fox jumps over the lazy dog",
+        "captionMetaKey": "",
         "id": ""
       }
     }

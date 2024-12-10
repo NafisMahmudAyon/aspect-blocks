@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "tailwind-blocks/accordion",
+  "name": "aspect-blocks/accordion",
   "version": "0.1.0",
   "title": "Accordion",
-  "category": "tailwind-blocks",
+  "category": "aspect-blocks",
   "icon": "welcome-learn-more",
   "attributes": {
     "accordion": {

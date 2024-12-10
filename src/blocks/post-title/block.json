@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "tailwind-blocks/post-title",
+  "name": "aspect-blocks/post-title",
   "version": "0.1.0",
   "title": "Post Title",
-  "category": "tailwind-blocks",
+  "category": "aspect-blocks",
   "icon": "welcome-learn-more",
   "usesContext": [
     "postId",

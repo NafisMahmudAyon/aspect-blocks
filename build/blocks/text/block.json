@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "tailwind-blocks/text",
+  "name": "aspect-blocks/text",
   "version": "0.1.0",
   "title": "Text",
-  "category": "tailwind-blocks",
+  "category": "aspect-blocks",
   "icon": "welcome-learn-more",
   "example": {
     "attributes": {

@@ -1,3 +1,5 @@
+import "../../style.css";
+
 import {
 	InspectorControls,
 	RichText,
@@ -7,9 +9,9 @@ import { registerBlockType } from "@wordpress/blocks";
 import { TabContent, TabItem, TabList, Tabs } from "aspect-ui/Tabs";
 import DropdownData from "../../components/block-components/dropdown-data";
 import InputData from "../../components/block-components/input-data";
-import Style from "../../components/Style";
 import { cn } from "../../components/utils/cn";
 import metadata from "./block.json";
+import Style from "../../components/Style";
 
 const tagNameOptions = [
 	{ label: "H1", value: "h1" },
@@ -37,7 +39,7 @@ function EditComponent({ attributes, setAttributes }) {
 	// Block properties with dynamic classes
 	const blockProps = useBlockProps({
 		className: cn(
-			"tailwind-blocks tailwind-blocks-text",
+			"aspect-blocks aspect-blocks-text",
 			text.class?.sm,
 			text.class?.md,
 			text.class?.desktop,
@@ -48,7 +50,7 @@ function EditComponent({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<div className="tailwind-blocks-editor-settings">
+				<div className="aspect-blocks-editor-settings">
 					<Tabs defaultActive="item-1">
 						<TabList className="px-3">
 							<TabItem value="item-1">Options</TabItem>

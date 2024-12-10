@@ -1,13 +1,13 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "tailwind-blocks/accordion-item",
+  "name": "aspect-blocks/accordion-item",
   "version": "0.1.0",
   "title": "Accordion Item",
-  "category": "tailwind-blocks",
+  "category": "aspect-blocks",
   "icon": "welcome-learn-more",
   "parent": [
-    "tailwind-blocks/accordion"
+    "aspect-blocks/accordion"
   ],
   "attributes": {
     "accordionItem": {
@@ -23,7 +23,6 @@
         "openIconType": "solid",
         "closeIcon": "chevron-up-icon",
         "closeIconType": "solid",
-        "iconClass": "",
         "class": {
           "sm": "",
           "md": "",

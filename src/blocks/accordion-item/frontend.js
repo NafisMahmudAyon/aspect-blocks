@@ -51,15 +51,15 @@ const IconToggle = ({
 // Function to replace <span> with the corresponding JSX component
 function replaceSpansWithIcons() {
 	const spans = document.querySelectorAll(
-		"span.tailwind-blocks-accordion-header-title",
+		"span.aspect-blocks-accordion-header-title",
 	);
-	console.log(spans)
+	console.log(spans);
 	spans.forEach((span) => {
-		console.log(span)
+		console.log(span);
 		const { openIconName, closeIconName, openIconType, closeIconType } =
 			span.dataset;
 
-			console.log(span.dataset);
+		console.log(span.dataset);
 		const classNames = span.className;
 
 		// Create the new component

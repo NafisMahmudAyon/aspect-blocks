@@ -1,3 +1,5 @@
+import "../../style.css";
+
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -52,7 +54,7 @@ function EditComponent(props) {
 	// Block Props
 	const blockProps = useBlockProps({
 		className: cn(
-			"tailwind-blocks tailwind-blocks-accordion-item-editor",
+			"aspect-blocks aspect-blocks-accordion-item-editor",
 			accordionItem.class?.sm,
 			accordionItem.class?.md,
 			accordionItem.class?.desktop,
@@ -77,7 +79,7 @@ function EditComponent(props) {
 	return (
 		<>
 			<InspectorControls>
-				<div className="tailwind-blocks-editor-settings mb-3">
+				<div className="aspect-blocks-editor-settings mb-3">
 					<Accordion iconPosition="right">
 						{/* Accordion Item Settings */}
 						<AccordionItem
@@ -271,7 +273,7 @@ function EditComponent(props) {
 				<accordionItem.headerTag
 					onClick={() => setOpen(!open)}
 					className={cn(
-						"tailwind-blocks-accordion-header",
+						"aspect-blocks-accordion-header",
 						accordionItem.accordionHeaderClass?.sm,
 						accordionItem.accordionHeaderClass?.md,
 						accordionItem.accordionHeaderClass?.desktop,
@@ -280,7 +282,7 @@ function EditComponent(props) {
 				>
 					<RichText
 						className={cn(
-							"tailwind-blocks-accordion-header-title",
+							"aspect-blocks-accordion-header-title",
 							accordionItem.accordionHeaderTitleClass?.sm,
 							accordionItem.accordionHeaderTitleClass?.md,
 							accordionItem.accordionHeaderTitleClass?.desktop,
@@ -294,7 +296,7 @@ function EditComponent(props) {
 					/>
 					<span
 						className={cn(
-							"tailwind-blocks-accordion-icon",
+							"aspect-blocks-accordion-icon",
 							accordionItem.accordionIconClass?.sm,
 							accordionItem.accordionIconClass?.md,
 							accordionItem.accordionIconClass?.desktop,
@@ -314,7 +316,7 @@ function EditComponent(props) {
 				{/* {open && ( */}
 				<accordionItem.contentTag
 					className={cn(
-						"tailwind-blocks-accordion-content-editor transition-[max-height] duration-300 ease-in-out",
+						"aspect-blocks-accordion-content-editor transition-[max-height] duration-300 ease-in-out",
 						accordionItem.accordionContentClass?.sm,
 						accordionItem.accordionContentClass?.md,
 						accordionItem.accordionContentClass?.desktop,

@@ -1,3 +1,5 @@
+import "../../style.css";
+
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -51,17 +53,17 @@ function EditComponent(props) {
 
 	const blockProps = useBlockProps({
 		className: cn(
-			"tailwind-blocks tailwind-blocks-accordion-editor",
+			"aspect-blocks aspect-blocks-accordion-editor",
 			accordion.class.sm,
 			accordion.class.md,
 			accordion.class.desktop,
 			accordion.class.custom,
 		),
 	});
-	const ALLOWED_BLOCKS = ["tailwind-blocks/accordion-item"];
+	const ALLOWED_BLOCKS = ["aspect-blocks/accordion-item"];
 	const MY_TEMPLATE = [
-		["tailwind-blocks/accordion-item", {}],
-		["tailwind-blocks/accordion-item", {}],
+		["aspect-blocks/accordion-item", {}],
+		["aspect-blocks/accordion-item", {}],
 	];
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
 		allowedBlocks: ALLOWED_BLOCKS,
@@ -73,7 +75,7 @@ function EditComponent(props) {
 	return (
 		<>
 			<InspectorControls>
-				<div className="tailwind-blocks-editor-settings">
+				<div className="aspect-blocks-editor-settings">
 					<Tabs defaultActive="item-1">
 						<TabList className="px-3">
 							<TabItem value="item-1">Options</TabItem>

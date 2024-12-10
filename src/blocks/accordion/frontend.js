@@ -5,7 +5,7 @@ import iconsListSolid from "../../components/icons/IconListSolid";
 
 document.addEventListener("DOMContentLoaded", () => {
 	const accordionContainers = document.querySelectorAll(
-		".tailwind-blocks-accordion",
+		".aspect-blocks-accordion",
 	);
 
 	// Map to store React roots for icon elements
@@ -24,19 +24,17 @@ document.addEventListener("DOMContentLoaded", () => {
 			accordionContainer.dataset.multiple === "1";
 
 		const accordionItems = accordionContainer.querySelectorAll(
-			".tailwind-blocks-accordion-item",
+			".aspect-blocks-accordion-item",
 		);
 
 		accordionItems.forEach((accordionItem) => {
 			const header = accordionItem.querySelector(
-				".tailwind-blocks-accordion-header",
+				".aspect-blocks-accordion-header",
 			);
 			const content = accordionItem.querySelector(
-				".tailwind-blocks-accordion-content",
+				".aspect-blocks-accordion-content",
 			);
-			const icon = accordionItem.querySelector(
-				".tailwind-blocks-accordion-icon",
-			);
+			const icon = accordionItem.querySelector(".aspect-blocks-accordion-icon");
 
 			const defaultOpen =
 				accordionItem.dataset.open === "true" ||
@@ -79,10 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				} else {
 					accordionItems.forEach((item) => {
 						const itemContent = item.querySelector(
-							".tailwind-blocks-accordion-content",
+							".aspect-blocks-accordion-content",
 						);
 						const itemIcon = item.querySelector(
-							".tailwind-blocks-accordion-icon",
+							".aspect-blocks-accordion-icon",
 						);
 						const itemIsOpen = item.classList.contains("open");
 

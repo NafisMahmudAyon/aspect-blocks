@@ -1,55 +1,72 @@
-=== Tailwind Blocks ===
-Contributors:      NafisMahmudAyon
-Tags:              block
+=== Aspect Blocks ===
+Contributors:      nafismahmudayon
+Tags:              blocks, UI blocks, Tailwind CSS, Tailwind, WordPress blocks
 Tested up to:      6.7
 Stable tag:        1.1
+Requires PHP:      7.0
 License:           GPL-2.0-or-later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+License URI:       [https://www.gnu.org/licenses/gpl-2.0.html](https://www.gnu.org/licenses/gpl-2.0.html)
 
-Example block scaffolded with Create Block tool.
+🌐 Aspect Blocks is a Gutenberg plugin that leverages Tailwind CSS for seamless style customization, providing a modern and responsive design. 🌟
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Aspect Blocks is a powerful WordPress plugin for the Gutenberg editor, designed to make content creation and styling effortless. Built with Tailwind CSS, it offers highly customizable and responsive blocks to enhance your site's design and functionality.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+## Development and Source Code
+The source code for this plugin can be found on GitHub: [GitHub Repository](https://github.com/NafisMahmudAyon/aspect-blocks)
 
-== Installation ==
+
+✏️ Current blocks include:
+
+- **Text Block**: Add and style text with ease.
+- **Container Block**: Create flexible layouts with customizable containers.
+- **Post Title Block**: Display the title of a post dynamically.
+- **Accordion Block**: Add collapsible sections to organize content efficiently.
+
+With Aspect Blocks, you can streamline your content creation process while ensuring a visually appealing and responsive design.
+
+=🔧 **Installation**
 
 This section describes how to install the plugin and get it working.
 
-e.g.
+1. Upload the plugin files to the `/wp-content/plugins/aspect-blocks` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
 
-1. Upload the plugin files to the `/wp-content/plugins/tailwind-blocks` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+=📖 **Frequently Asked Questions**
 
+= What is Aspect Blocks? =
 
-== Frequently Asked Questions ==
+Aspect Blocks is a Gutenberg plugin that provides a set of customizable blocks styled with Tailwind CSS for creating modern and responsive designs in WordPress.
 
-= A question that someone might have =
+= Do I need to know Tailwind CSS to use this plugin? =
 
-An answer to that question.
+No, you don’t need to know Tailwind CSS. However, if you are familiar with it, you can take full advantage of its utility classes for advanced customizations.
 
-= What about foo bar? =
+= Are the blocks mobile responsive? =
 
-Answer to foo bar dilemma.
+Yes, all blocks are designed to be fully responsive, ensuring a seamless experience across devices.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. **Text Block**: Showcase of the customizable Text Block in action.
+2. **Accordion Block**: Example of the Accordion Block used to organize content.
+3. **Post Title Block**: Displaying dynamic post titles with style.
+4. **Container Block**: Flexible layouts using the Container Block.
 
 == Changelog ==
 
+= 1.1 =
+
+- Added Image Block.
+- Added Accordion Block.
+- Enhanced responsiveness for all blocks.
+
 = 1.0 =
-* Release
+
+- Initial release with Text Block, Container Block, and Post Title Block.
 
 == Arbitrary section ==
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+Aspect Blocks is perfect for developers and non-developers alike, offering simplicity with extensive customization options. Whether you’re building a blog, portfolio, or business website, these blocks can help you create a stunning, responsive design quickly and easily.
+

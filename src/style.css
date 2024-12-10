@@ -1,78 +1,58 @@
-@import "tailwindcss";
-
 @import "aspect-ui/css";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@config "../tailwind.config.js";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+.aspect-blocks .block-editor-button-block-appender {
+	box-shadow: none;
+	border: 1px dashed;
+	border-color: hsl(0, 3%, 12%);
+	color: slategray;
+	border-radius: 4px;
+	transition: all;
+	transition-duration: 250ms;
+	transition-timing-function: ease-in-out;
+	&:hover {
+		border: 2px dashed hsl(0, 3%, 22%);
+		border-radius: 8px;
+		color: slategrey;
+	}
 }
 
-.tailwind-blocks .block-editor-button-block-appender{
-  box-shadow: none;
-  border: 1px dashed;
-  border-color: hsl(0, 3%, 12%);
-  color: slategray;
-  border-radius: 4px;
-  transition: all;
-  transition-duration: 250ms;
-  transition-timing-function: ease-in-out;
+.aspect-blocks-accordion-content {
+	height: 0;
+	overflow: hidden;
+	transition: height 0.3s ease;
 }
 
-.tailwind-blocks .block-editor-button-block-appender:hover{
-    border: 2px dashed hsl(0, 3%, 22%);
-    border-radius: 8px;
-    color: slategrey;
-  }
-
-.tailwind-blocks-accordion-content {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s ease;
+.aspect-blocks-accordion-content.open {
+	height: auto;
 }
 
-.tailwind-blocks-accordion-content.open {
-  height: auto;
+.aspect-blocks-accordion-icon.rotate {
+	transform: rotate(180deg);
+	transition: transform 0.3s ease;
+}
+.aspect-blocks-editor-settings {
+	font-family: "Poppins", sans-serif;
 }
 
-.tailwind-blocks-accordion-icon.rotate {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease;
+.aspect-blocks-editor-settings select {
+	appearance: none;
+	/* outline: 10px red; */
+	/* border: 0; */
+	box-shadow: none;
+	/* padding-inline-start: 2.75rem; */
+	cursor: pointer;
+	border-radius: 0.375rem !important;
 }
-.tailwind-blocks-editor-settings{
-font-family: "Poppins", sans-serif;
-}
-
-.tailwind-blocks-editor-settings select {
-  appearance: none;
-  /* outline: 10px red; */
-  /* border: 0; */
-  box-shadow: none;
-  /* padding-inline-start: 2.75rem; */
-  cursor: pointer;
-  border-radius: 0.375rem !important;
-}
-.tailwind-blocks-editor-settings option {
-  @apply bg-primary-200 text-primary-900;
-  font-size: 11px !important;
-  padding: 10px; /* May not work consistently across browsers */
-  width: 50%;
-  &:checked{
-    @apply bg-primary-900 text-primary-200;
-  }
+.aspect-blocks-editor-settings option {
+	@apply bg-primary-200 text-primary-900;
+	font-size: 11px !important;
+	padding: 10px; /* May not work consistently across browsers */
+	width: 50%;
+	&:checked {
+		@apply bg-primary-900 text-primary-200;
+	}
 }
